@@ -1,0 +1,17 @@
+{
+  "name": "delve_client_sdk",
+  "version": "1.1.4",
+  "description": "This_is_a_Client_SDK_for_Delve_API",
+  "license": "Apache 2.0",
+  "main": "src/index.js",
+  "browser": {
+    "fs": false
+  },
+  "dependencies": {
+    "querystring": "0.2.0",
+    "superagent": "^5.3.0"
+  },
+  "files": [
+    "src"
+  ]
+}

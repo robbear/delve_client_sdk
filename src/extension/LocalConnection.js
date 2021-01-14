@@ -278,7 +278,7 @@ class LocalConnection extends connection.Connection {
             action.relname = relname
         }
 
-        return this.runAction(action)
+        return this.runActionX(action)
     }
 
     create_databaseX() {
@@ -310,7 +310,7 @@ class LocalConnection extends connection.Connection {
         action.delete_source = []
         action.delete_source.push(sourceName)
 
-        return this.runAction(action, { 'isReadOnly': false })
+        return this.runActionX(action, { 'isReadOnly': false })
     }
 
     install_sourceX(sourceName, sourceStr) {
@@ -328,7 +328,7 @@ class LocalConnection extends connection.Connection {
         action.sources.push(source)
         action.type = 'InstallAction'
 
-        return this.runAction(action, { 'isReadOnly': false })
+        return this.runActionX(action, { 'isReadOnly': false })
     }
 
     list_edbX(relname) {
@@ -339,7 +339,7 @@ class LocalConnection extends connection.Connection {
             action.relname = relname
         }
 
-        return this.runAction(action)
+        return this.runActionX(action)
     }
 
     list_sourceX() {
@@ -348,10 +348,10 @@ class LocalConnection extends connection.Connection {
         action.sources.push()
         action.type = 'ListSourceAction'
 
-        return this.runAction(action)
+        return this.runActionX(action)
     }
 
-  //load_csvX() {}
+    //load_csvX() {}
     
     /**
      * Load a JSON file *local* to the Delve Server

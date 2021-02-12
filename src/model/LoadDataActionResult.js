@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import ActionResult from './ActionResult';
+import CollectProblemsActionAllOf from './CollectProblemsActionAllOf';
 
 /**
  * The LoadDataActionResult model module.
@@ -25,10 +26,11 @@ class LoadDataActionResult {
      * @alias module:model/LoadDataActionResult
      * @extends module:model/ActionResult
      * @implements module:model/ActionResult
+     * @implements module:model/CollectProblemsActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        ActionResult.initialize(this, type);
+        ActionResult.initialize(this, type);CollectProblemsActionAllOf.initialize(this);
         LoadDataActionResult.initialize(this, type);
     }
 
@@ -52,13 +54,22 @@ class LoadDataActionResult {
             obj = obj || new LoadDataActionResult();
             ActionResult.constructFromObject(data, obj);
             ActionResult.constructFromObject(data, obj);
+            CollectProblemsActionAllOf.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('dummy')) {
+                obj['dummy'] = ApiClient.convertToType(data['dummy'], 'String');
+            }
         }
         return obj;
     }
 
 
 }
+
+/**
+ * @member {String} dummy
+ */
+LoadDataActionResult.prototype['dummy'] = undefined;
 
 
 // Implement ActionResult interface:
@@ -67,6 +78,11 @@ class LoadDataActionResult {
  * @default ''
  */
 ActionResult.prototype['type'] = '';
+// Implement CollectProblemsActionAllOf interface:
+/**
+ * @member {String} dummy
+ */
+CollectProblemsActionAllOf.prototype['dummy'] = undefined;
 
 
 

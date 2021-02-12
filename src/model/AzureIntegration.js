@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import AzureIntegrationAllOf from './AzureIntegrationAllOf';
 import Integration from './Integration';
 import PairSymbolString from './PairSymbolString';
 
@@ -26,10 +27,11 @@ class AzureIntegration {
      * @alias module:model/AzureIntegration
      * @extends module:model/Integration
      * @implements module:model/Integration
+     * @implements module:model/AzureIntegrationAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Integration.initialize(this, type);
+        Integration.initialize(this, type);AzureIntegrationAllOf.initialize(this);
         AzureIntegration.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class AzureIntegration {
             obj = obj || new AzureIntegration();
             Integration.constructFromObject(data, obj);
             Integration.constructFromObject(data, obj);
+            AzureIntegrationAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('credentials')) {
                 obj['credentials'] = ApiClient.convertToType(data['credentials'], [PairSymbolString]);
@@ -108,6 +111,27 @@ AzureIntegration.prototype['tenant_id'] = undefined;
  * @default ''
  */
 Integration.prototype['type'] = '';
+// Implement AzureIntegrationAllOf interface:
+/**
+ * @member {Array.<module:model/PairSymbolString>} credentials
+ */
+AzureIntegrationAllOf.prototype['credentials'] = undefined;
+/**
+ * @member {String} name
+ */
+AzureIntegrationAllOf.prototype['name'] = undefined;
+/**
+ * @member {Array.<String>} storage_allowed_locations
+ */
+AzureIntegrationAllOf.prototype['storage_allowed_locations'] = undefined;
+/**
+ * @member {Array.<String>} storage_blocked_locations
+ */
+AzureIntegrationAllOf.prototype['storage_blocked_locations'] = undefined;
+/**
+ * @member {String} tenant_id
+ */
+AzureIntegrationAllOf.prototype['tenant_id'] = undefined;
 
 
 

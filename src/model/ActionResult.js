@@ -51,7 +51,7 @@ class ActionResult {
 
             if (data.hasOwnProperty('type')) {
                 obj['type'] = ApiClient.convertToType(data['type'], 'String');
-                obj = ApiClient.convertToType(data, obj['type'])
+                obj = ApiClient.convertToType(data, obj['type']);
             }
         }
         return obj;

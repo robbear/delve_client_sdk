@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import ModifyWorkspaceActionAllOf from './ModifyWorkspaceActionAllOf';
 
 /**
  * The ModifyWorkspaceAction model module.
@@ -25,10 +26,11 @@ class ModifyWorkspaceAction {
      * @alias module:model/ModifyWorkspaceAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/ModifyWorkspaceActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Action.initialize(this, type);
+        Action.initialize(this, type);ModifyWorkspaceActionAllOf.initialize(this);
         ModifyWorkspaceAction.initialize(this, type);
     }
 
@@ -52,6 +54,7 @@ class ModifyWorkspaceAction {
             obj = obj || new ModifyWorkspaceAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            ModifyWorkspaceActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('delete_edb')) {
                 obj['delete_edb'] = ApiClient.convertToType(data['delete_edb'], 'String');
@@ -91,6 +94,19 @@ ModifyWorkspaceAction.prototype['enable_library'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement ModifyWorkspaceActionAllOf interface:
+/**
+ * @member {String} delete_edb
+ */
+ModifyWorkspaceActionAllOf.prototype['delete_edb'] = undefined;
+/**
+ * @member {Array.<String>} delete_source
+ */
+ModifyWorkspaceActionAllOf.prototype['delete_source'] = undefined;
+/**
+ * @member {String} enable_library
+ */
+ModifyWorkspaceActionAllOf.prototype['enable_library'] = undefined;
 
 
 

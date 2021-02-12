@@ -14,6 +14,7 @@
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
 import LinkedList from './LinkedList';
+import SyntaxErrorAllOf from './SyntaxErrorAllOf';
 import SyntaxNode from './SyntaxNode';
 
 /**
@@ -27,11 +28,14 @@ class SyntaxError {
      * @alias module:model/SyntaxError
      * @extends module:model/AbstractProblem
      * @implements module:model/AbstractProblem
+     * @implements module:model/SyntaxErrorAllOf
      * @param type {String} 
+     * @param node {module:model/SyntaxNode} 
+     * @param trace {module:model/LinkedList} 
      */
-    constructor(type) { 
-        AbstractProblem.initialize(this, type);
-        SyntaxError.initialize(this, type);
+    constructor(type, node, trace) { 
+        AbstractProblem.initialize(this, type);SyntaxErrorAllOf.initialize(this, node, trace);
+        SyntaxError.initialize(this, type, node, trace);
     }
 
     /**
@@ -39,7 +43,7 @@ class SyntaxError {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, node, trace) { 
         obj['node'] = node;
         obj['trace'] = trace;
     }
@@ -56,6 +60,7 @@ class SyntaxError {
             obj = obj || new SyntaxError();
             AbstractProblem.constructFromObject(data, obj);
             AbstractProblem.constructFromObject(data, obj);
+            SyntaxErrorAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('next')) {
                 obj['next'] = SyntaxNode.constructFromObject(data['next']);
@@ -95,6 +100,19 @@ SyntaxError.prototype['trace'] = undefined;
  * @default ''
  */
 AbstractProblem.prototype['type'] = '';
+// Implement SyntaxErrorAllOf interface:
+/**
+ * @member {module:model/SyntaxNode} next
+ */
+SyntaxErrorAllOf.prototype['next'] = undefined;
+/**
+ * @member {module:model/SyntaxNode} node
+ */
+SyntaxErrorAllOf.prototype['node'] = undefined;
+/**
+ * @member {module:model/LinkedList} trace
+ */
+SyntaxErrorAllOf.prototype['trace'] = undefined;
 
 
 

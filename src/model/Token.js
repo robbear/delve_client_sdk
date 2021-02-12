@@ -14,6 +14,7 @@
 import ApiClient from '../ApiClient';
 import Range from './Range';
 import SyntaxNode from './SyntaxNode';
+import TokenAllOf from './TokenAllOf';
 
 /**
  * The Token model module.
@@ -26,11 +27,14 @@ class Token {
      * @alias module:model/Token
      * @extends module:model/SyntaxNode
      * @implements module:model/SyntaxNode
+     * @implements module:model/TokenAllOf
      * @param type {String} 
+     * @param range {module:model/Range} 
+     * @param value {String} 
      */
-    constructor(type) { 
-        SyntaxNode.initialize(this, type);
-        Token.initialize(this, type);
+    constructor(type, range, value) { 
+        SyntaxNode.initialize(this, type);TokenAllOf.initialize(this, range, value);
+        Token.initialize(this, type, range, value);
     }
 
     /**
@@ -38,7 +42,7 @@ class Token {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, range, value) { 
         obj['range'] = range;
         obj['value'] = value || '';
     }
@@ -55,6 +59,7 @@ class Token {
             obj = obj || new Token();
             SyntaxNode.constructFromObject(data, obj);
             SyntaxNode.constructFromObject(data, obj);
+            TokenAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('range')) {
                 obj['range'] = Range.constructFromObject(data['range']);
@@ -87,6 +92,16 @@ Token.prototype['value'] = '';
  * @default ''
  */
 SyntaxNode.prototype['type'] = '';
+// Implement TokenAllOf interface:
+/**
+ * @member {module:model/Range} range
+ */
+TokenAllOf.prototype['range'] = undefined;
+/**
+ * @member {String} value
+ * @default ''
+ */
+TokenAllOf.prototype['value'] = '';
 
 
 

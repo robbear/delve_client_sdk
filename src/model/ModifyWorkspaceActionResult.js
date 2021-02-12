@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import ActionResult from './ActionResult';
+import ModifyWorkspaceActionResultAllOf from './ModifyWorkspaceActionResultAllOf';
 import RelKey from './RelKey';
 
 /**
@@ -26,10 +27,11 @@ class ModifyWorkspaceActionResult {
      * @alias module:model/ModifyWorkspaceActionResult
      * @extends module:model/ActionResult
      * @implements module:model/ActionResult
+     * @implements module:model/ModifyWorkspaceActionResultAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        ActionResult.initialize(this, type);
+        ActionResult.initialize(this, type);ModifyWorkspaceActionResultAllOf.initialize(this);
         ModifyWorkspaceActionResult.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class ModifyWorkspaceActionResult {
             obj = obj || new ModifyWorkspaceActionResult();
             ActionResult.constructFromObject(data, obj);
             ActionResult.constructFromObject(data, obj);
+            ModifyWorkspaceActionResultAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('delete_edb_result')) {
                 obj['delete_edb_result'] = ApiClient.convertToType(data['delete_edb_result'], [RelKey]);
@@ -76,6 +79,11 @@ ModifyWorkspaceActionResult.prototype['delete_edb_result'] = undefined;
  * @default ''
  */
 ActionResult.prototype['type'] = '';
+// Implement ModifyWorkspaceActionResultAllOf interface:
+/**
+ * @member {Array.<module:model/RelKey>} delete_edb_result
+ */
+ModifyWorkspaceActionResultAllOf.prototype['delete_edb_result'] = undefined;
 
 
 

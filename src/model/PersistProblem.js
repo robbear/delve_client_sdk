@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
+import ExceptionProblemAllOf from './ExceptionProblemAllOf';
 
 /**
  * The PersistProblem model module.
@@ -25,11 +26,13 @@ class PersistProblem {
      * @alias module:model/PersistProblem
      * @extends module:model/AbstractProblem
      * @implements module:model/AbstractProblem
+     * @implements module:model/ExceptionProblemAllOf
      * @param type {String} 
+     * @param exception {String} 
      */
-    constructor(type) { 
-        AbstractProblem.initialize(this, type);
-        PersistProblem.initialize(this, type);
+    constructor(type, exception) { 
+        AbstractProblem.initialize(this, type);ExceptionProblemAllOf.initialize(this, exception);
+        PersistProblem.initialize(this, type, exception);
     }
 
     /**
@@ -37,7 +40,7 @@ class PersistProblem {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, exception) { 
         obj['exception'] = exception || '';
     }
 
@@ -53,6 +56,7 @@ class PersistProblem {
             obj = obj || new PersistProblem();
             AbstractProblem.constructFromObject(data, obj);
             AbstractProblem.constructFromObject(data, obj);
+            ExceptionProblemAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('exception')) {
                 obj['exception'] = ApiClient.convertToType(data['exception'], 'String');
@@ -85,6 +89,16 @@ PersistProblem.prototype['exception_stacktrace'] = undefined;
  * @default ''
  */
 AbstractProblem.prototype['type'] = '';
+// Implement ExceptionProblemAllOf interface:
+/**
+ * @member {String} exception
+ * @default ''
+ */
+ExceptionProblemAllOf.prototype['exception'] = '';
+/**
+ * @member {String} exception_stacktrace
+ */
+ExceptionProblemAllOf.prototype['exception_stacktrace'] = undefined;
 
 
 

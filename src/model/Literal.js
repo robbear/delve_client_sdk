@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import LiteralAllOf from './LiteralAllOf';
 import Range from './Range';
 import SyntaxNode from './SyntaxNode';
 
@@ -26,11 +27,15 @@ class Literal {
      * @alias module:model/Literal
      * @extends module:model/SyntaxNode
      * @implements module:model/SyntaxNode
+     * @implements module:model/LiteralAllOf
      * @param type {String} 
+     * @param missing {Boolean} 
+     * @param range {module:model/Range} 
+     * @param value {String} 
      */
-    constructor(type) { 
-        SyntaxNode.initialize(this, type);
-        Literal.initialize(this, type);
+    constructor(type, missing, range, value) { 
+        SyntaxNode.initialize(this, type);LiteralAllOf.initialize(this, missing, range, value);
+        Literal.initialize(this, type, missing, range, value);
     }
 
     /**
@@ -38,7 +43,7 @@ class Literal {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, missing, range, value) { 
         obj['missing'] = missing || false;
         obj['range'] = range;
         obj['value'] = value || '';
@@ -56,6 +61,7 @@ class Literal {
             obj = obj || new Literal();
             SyntaxNode.constructFromObject(data, obj);
             SyntaxNode.constructFromObject(data, obj);
+            LiteralAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('missing')) {
                 obj['missing'] = ApiClient.convertToType(data['missing'], 'Boolean');
@@ -97,6 +103,21 @@ Literal.prototype['value'] = '';
  * @default ''
  */
 SyntaxNode.prototype['type'] = '';
+// Implement LiteralAllOf interface:
+/**
+ * @member {Boolean} missing
+ * @default false
+ */
+LiteralAllOf.prototype['missing'] = false;
+/**
+ * @member {module:model/Range} range
+ */
+LiteralAllOf.prototype['range'] = undefined;
+/**
+ * @member {String} value
+ * @default ''
+ */
+LiteralAllOf.prototype['value'] = '';
 
 
 

@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import QueryActionAllOf from './QueryActionAllOf';
 import Relation from './Relation';
 import Source from './Source';
 
@@ -27,11 +28,13 @@ class QueryAction {
      * @alias module:model/QueryAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/QueryActionAllOf
      * @param type {String} 
+     * @param source {module:model/Source} 
      */
-    constructor(type) { 
-        Action.initialize(this, type);
-        QueryAction.initialize(this, type);
+    constructor(type, source) { 
+        Action.initialize(this, type);QueryActionAllOf.initialize(this, source);
+        QueryAction.initialize(this, type, source);
     }
 
     /**
@@ -39,8 +42,8 @@ class QueryAction {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
-        obj['source'] = null;
+    static initialize(obj, type, source) { 
+        obj['source'] = source;
     }
 
     /**
@@ -55,6 +58,7 @@ class QueryAction {
             obj = obj || new QueryAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            QueryActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('inputs')) {
                 obj['inputs'] = ApiClient.convertToType(data['inputs'], [Relation]);
@@ -102,6 +106,23 @@ QueryAction.prototype['source'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement QueryActionAllOf interface:
+/**
+ * @member {Array.<module:model/Relation>} inputs
+ */
+QueryActionAllOf.prototype['inputs'] = undefined;
+/**
+ * @member {Array.<String>} outputs
+ */
+QueryActionAllOf.prototype['outputs'] = undefined;
+/**
+ * @member {Array.<String>} persist
+ */
+QueryActionAllOf.prototype['persist'] = undefined;
+/**
+ * @member {module:model/Source} source
+ */
+QueryActionAllOf.prototype['source'] = undefined;
 
 
 

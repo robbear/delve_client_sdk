@@ -97,4 +97,3 @@ AnyType['TypeEnum'] = {
 
 
 export default AnyType;
-

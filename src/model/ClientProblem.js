@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
+import ClientProblemAllOf from './ClientProblemAllOf';
 
 /**
  * The ClientProblem model module.
@@ -25,11 +26,18 @@ class ClientProblem {
      * @alias module:model/ClientProblem
      * @extends module:model/AbstractProblem
      * @implements module:model/AbstractProblem
+     * @implements module:model/ClientProblemAllOf
      * @param type {String} 
+     * @param errorCode {String} 
+     * @param isError {Boolean} 
+     * @param isException {Boolean} 
+     * @param message {String} 
+     * @param path {String} 
+     * @param report {String} 
      */
-    constructor(type) { 
-        AbstractProblem.initialize(this, type);
-        ClientProblem.initialize(this, type);
+    constructor(type, errorCode, isError, isException, message, path, report) { 
+        AbstractProblem.initialize(this, type);ClientProblemAllOf.initialize(this, errorCode, isError, isException, message, path, report);
+        ClientProblem.initialize(this, type, errorCode, isError, isException, message, path, report);
     }
 
     /**
@@ -37,7 +45,7 @@ class ClientProblem {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, errorCode, isError, isException, message, path, report) { 
         obj['error_code'] = errorCode || '';
         obj['is_error'] = isError || false;
         obj['is_exception'] = isException || false;
@@ -58,6 +66,7 @@ class ClientProblem {
             obj = obj || new ClientProblem();
             AbstractProblem.constructFromObject(data, obj);
             AbstractProblem.constructFromObject(data, obj);
+            ClientProblemAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('error_code')) {
                 obj['error_code'] = ApiClient.convertToType(data['error_code'], 'String');
@@ -127,6 +136,37 @@ ClientProblem.prototype['report'] = '';
  * @default ''
  */
 AbstractProblem.prototype['type'] = '';
+// Implement ClientProblemAllOf interface:
+/**
+ * @member {String} error_code
+ * @default ''
+ */
+ClientProblemAllOf.prototype['error_code'] = '';
+/**
+ * @member {Boolean} is_error
+ * @default false
+ */
+ClientProblemAllOf.prototype['is_error'] = false;
+/**
+ * @member {Boolean} is_exception
+ * @default false
+ */
+ClientProblemAllOf.prototype['is_exception'] = false;
+/**
+ * @member {String} message
+ * @default ''
+ */
+ClientProblemAllOf.prototype['message'] = '';
+/**
+ * @member {String} path
+ * @default ''
+ */
+ClientProblemAllOf.prototype['path'] = '';
+/**
+ * @member {String} report
+ * @default ''
+ */
+ClientProblemAllOf.prototype['report'] = '';
 
 
 

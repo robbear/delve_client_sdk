@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import ActionResult from './ActionResult';
+import ListEdbActionResultAllOf from './ListEdbActionResultAllOf';
 import RelKey from './RelKey';
 
 /**
@@ -26,10 +27,11 @@ class ListEdbActionResult {
      * @alias module:model/ListEdbActionResult
      * @extends module:model/ActionResult
      * @implements module:model/ActionResult
+     * @implements module:model/ListEdbActionResultAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        ActionResult.initialize(this, type);
+        ActionResult.initialize(this, type);ListEdbActionResultAllOf.initialize(this);
         ListEdbActionResult.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class ListEdbActionResult {
             obj = obj || new ListEdbActionResult();
             ActionResult.constructFromObject(data, obj);
             ActionResult.constructFromObject(data, obj);
+            ListEdbActionResultAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('rels')) {
                 obj['rels'] = ApiClient.convertToType(data['rels'], [RelKey]);
@@ -76,6 +79,11 @@ ListEdbActionResult.prototype['rels'] = undefined;
  * @default ''
  */
 ActionResult.prototype['type'] = '';
+// Implement ListEdbActionResultAllOf interface:
+/**
+ * @member {Array.<module:model/RelKey>} rels
+ */
+ListEdbActionResultAllOf.prototype['rels'] = undefined;
 
 
 

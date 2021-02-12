@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import CSVFileSyntaxAllOf from './CSVFileSyntaxAllOf';
 import FileSyntax from './FileSyntax';
 
 /**
@@ -25,11 +26,19 @@ class CSVFileSyntax {
      * @alias module:model/CSVFileSyntax
      * @extends module:model/FileSyntax
      * @implements module:model/FileSyntax
+     * @implements module:model/CSVFileSyntaxAllOf
      * @param type {String} 
+     * @param datarow {Number} 
+     * @param delim {String} 
+     * @param escapechar {String} 
+     * @param headerRow {Number} 
+     * @param ignorerepeated {Boolean} 
+     * @param normalizenames {Boolean} 
+     * @param quotechar {String} 
      */
-    constructor(type) { 
-        FileSyntax.initialize(this, type);
-        CSVFileSyntax.initialize(this, type);
+    constructor(type, datarow, delim, escapechar, headerRow, ignorerepeated, normalizenames, quotechar) { 
+        FileSyntax.initialize(this, type);CSVFileSyntaxAllOf.initialize(this, datarow, delim, escapechar, headerRow, ignorerepeated, normalizenames, quotechar);
+        CSVFileSyntax.initialize(this, type, datarow, delim, escapechar, headerRow, ignorerepeated, normalizenames, quotechar);
     }
 
     /**
@@ -37,7 +46,7 @@ class CSVFileSyntax {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, datarow, delim, escapechar, headerRow, ignorerepeated, normalizenames, quotechar) { 
         obj['datarow'] = datarow || 0;
         obj['delim'] = delim || '';
         obj['escapechar'] = escapechar || '';
@@ -59,6 +68,7 @@ class CSVFileSyntax {
             obj = obj || new CSVFileSyntax();
             FileSyntax.constructFromObject(data, obj);
             FileSyntax.constructFromObject(data, obj);
+            CSVFileSyntaxAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('datarow')) {
                 obj['datarow'] = ApiClient.convertToType(data['datarow'], 'Number');
@@ -153,6 +163,50 @@ CSVFileSyntax.prototype['quotechar'] = '';
  * @default ''
  */
 FileSyntax.prototype['type'] = '';
+// Implement CSVFileSyntaxAllOf interface:
+/**
+ * @member {Number} datarow
+ * @default 0
+ */
+CSVFileSyntaxAllOf.prototype['datarow'] = 0;
+/**
+ * @member {String} delim
+ * @default ''
+ */
+CSVFileSyntaxAllOf.prototype['delim'] = '';
+/**
+ * @member {String} escapechar
+ * @default ''
+ */
+CSVFileSyntaxAllOf.prototype['escapechar'] = '';
+/**
+ * @member {Array.<String>} header
+ */
+CSVFileSyntaxAllOf.prototype['header'] = undefined;
+/**
+ * @member {Number} header_row
+ * @default 0
+ */
+CSVFileSyntaxAllOf.prototype['header_row'] = 0;
+/**
+ * @member {Boolean} ignorerepeated
+ * @default false
+ */
+CSVFileSyntaxAllOf.prototype['ignorerepeated'] = false;
+/**
+ * @member {Array.<String>} missingstrings
+ */
+CSVFileSyntaxAllOf.prototype['missingstrings'] = undefined;
+/**
+ * @member {Boolean} normalizenames
+ * @default false
+ */
+CSVFileSyntaxAllOf.prototype['normalizenames'] = false;
+/**
+ * @member {String} quotechar
+ * @default ''
+ */
+CSVFileSyntaxAllOf.prototype['quotechar'] = '';
 
 
 

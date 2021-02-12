@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import CollectProblemsActionAllOf from './CollectProblemsActionAllOf';
 import FileSyntax from './FileSyntax';
 
 /**
@@ -25,10 +26,11 @@ class JSONFileSyntax {
      * @alias module:model/JSONFileSyntax
      * @extends module:model/FileSyntax
      * @implements module:model/FileSyntax
+     * @implements module:model/CollectProblemsActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        FileSyntax.initialize(this, type);
+        FileSyntax.initialize(this, type);CollectProblemsActionAllOf.initialize(this);
         JSONFileSyntax.initialize(this, type);
     }
 
@@ -52,13 +54,22 @@ class JSONFileSyntax {
             obj = obj || new JSONFileSyntax();
             FileSyntax.constructFromObject(data, obj);
             FileSyntax.constructFromObject(data, obj);
+            CollectProblemsActionAllOf.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('dummy')) {
+                obj['dummy'] = ApiClient.convertToType(data['dummy'], 'String');
+            }
         }
         return obj;
     }
 
 
 }
+
+/**
+ * @member {String} dummy
+ */
+JSONFileSyntax.prototype['dummy'] = undefined;
 
 
 // Implement FileSyntax interface:
@@ -67,6 +78,11 @@ class JSONFileSyntax {
  * @default ''
  */
 FileSyntax.prototype['type'] = '';
+// Implement CollectProblemsActionAllOf interface:
+/**
+ * @member {String} dummy
+ */
+CollectProblemsActionAllOf.prototype['dummy'] = undefined;
 
 
 

@@ -14,6 +14,7 @@
 import ApiClient from '../ApiClient';
 import Action from './Action';
 import LoadData from './LoadData';
+import LoadDataActionAllOf from './LoadDataActionAllOf';
 
 /**
  * The LoadDataAction model module.
@@ -26,11 +27,14 @@ class LoadDataAction {
      * @alias module:model/LoadDataAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/LoadDataActionAllOf
      * @param type {String} 
+     * @param rel {String} 
+     * @param value {module:model/LoadData} 
      */
-    constructor(type) { 
-        Action.initialize(this, type);
-        LoadDataAction.initialize(this, type);
+    constructor(type, rel, value) { 
+        Action.initialize(this, type);LoadDataActionAllOf.initialize(this, rel, value);
+        LoadDataAction.initialize(this, type, rel, value);
     }
 
     /**
@@ -38,7 +42,7 @@ class LoadDataAction {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, rel, value) { 
         obj['rel'] = rel || '';
         obj['value'] = value;
     }
@@ -55,6 +59,7 @@ class LoadDataAction {
             obj = obj || new LoadDataAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            LoadDataActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('rel')) {
                 obj['rel'] = ApiClient.convertToType(data['rel'], 'String');
@@ -87,6 +92,16 @@ LoadDataAction.prototype['value'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement LoadDataActionAllOf interface:
+/**
+ * @member {String} rel
+ * @default ''
+ */
+LoadDataActionAllOf.prototype['rel'] = '';
+/**
+ * @member {module:model/LoadData} value
+ */
+LoadDataActionAllOf.prototype['value'] = undefined;
 
 
 

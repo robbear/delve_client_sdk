@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import ImportActionAllOf from './ImportActionAllOf';
 import Relation from './Relation';
 
 /**
@@ -26,10 +27,11 @@ class ImportAction {
      * @alias module:model/ImportAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/ImportActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Action.initialize(this, type);
+        Action.initialize(this, type);ImportActionAllOf.initialize(this);
         ImportAction.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class ImportAction {
             obj = obj || new ImportAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            ImportActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('inputs')) {
                 obj['inputs'] = ApiClient.convertToType(data['inputs'], [Relation]);
@@ -76,6 +79,11 @@ ImportAction.prototype['inputs'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement ImportActionAllOf interface:
+/**
+ * @member {Array.<module:model/Relation>} inputs
+ */
+ImportActionAllOf.prototype['inputs'] = undefined;
 
 
 

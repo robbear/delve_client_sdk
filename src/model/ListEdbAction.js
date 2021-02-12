@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import CardinalityActionAllOf from './CardinalityActionAllOf';
 
 /**
  * The ListEdbAction model module.
@@ -25,10 +26,11 @@ class ListEdbAction {
      * @alias module:model/ListEdbAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/CardinalityActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Action.initialize(this, type);
+        Action.initialize(this, type);CardinalityActionAllOf.initialize(this);
         ListEdbAction.initialize(this, type);
     }
 
@@ -52,6 +54,7 @@ class ListEdbAction {
             obj = obj || new ListEdbAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            CardinalityActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('relname')) {
                 obj['relname'] = ApiClient.convertToType(data['relname'], 'String');
@@ -75,6 +78,11 @@ ListEdbAction.prototype['relname'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement CardinalityActionAllOf interface:
+/**
+ * @member {String} relname
+ */
+CardinalityActionAllOf.prototype['relname'] = undefined;
 
 
 

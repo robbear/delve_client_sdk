@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import CollectProblemsActionAllOf from './CollectProblemsActionAllOf';
 import Integration from './Integration';
 
 /**
@@ -25,10 +26,11 @@ class DefaultIntegration {
      * @alias module:model/DefaultIntegration
      * @extends module:model/Integration
      * @implements module:model/Integration
+     * @implements module:model/CollectProblemsActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Integration.initialize(this, type);
+        Integration.initialize(this, type);CollectProblemsActionAllOf.initialize(this);
         DefaultIntegration.initialize(this, type);
     }
 
@@ -52,13 +54,22 @@ class DefaultIntegration {
             obj = obj || new DefaultIntegration();
             Integration.constructFromObject(data, obj);
             Integration.constructFromObject(data, obj);
+            CollectProblemsActionAllOf.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('dummy')) {
+                obj['dummy'] = ApiClient.convertToType(data['dummy'], 'String');
+            }
         }
         return obj;
     }
 
 
 }
+
+/**
+ * @member {String} dummy
+ */
+DefaultIntegration.prototype['dummy'] = undefined;
 
 
 // Implement Integration interface:
@@ -67,6 +78,11 @@ class DefaultIntegration {
  * @default ''
  */
 Integration.prototype['type'] = '';
+// Implement CollectProblemsActionAllOf interface:
+/**
+ * @member {String} dummy
+ */
+CollectProblemsActionAllOf.prototype['dummy'] = undefined;
 
 
 

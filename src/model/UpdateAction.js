@@ -15,6 +15,7 @@ import ApiClient from '../ApiClient';
 import Action from './Action';
 import PairAnyValueAnyValue from './PairAnyValueAnyValue';
 import RelKey from './RelKey';
+import UpdateActionAllOf from './UpdateActionAllOf';
 
 /**
  * The UpdateAction model module.
@@ -27,11 +28,13 @@ class UpdateAction {
      * @alias module:model/UpdateAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/UpdateActionAllOf
      * @param type {String} 
+     * @param rel {module:model/RelKey} 
      */
-    constructor(type) { 
-        Action.initialize(this, type);
-        UpdateAction.initialize(this, type);
+    constructor(type, rel) { 
+        Action.initialize(this, type);UpdateActionAllOf.initialize(this, rel);
+        UpdateAction.initialize(this, type, rel);
     }
 
     /**
@@ -39,7 +42,7 @@ class UpdateAction {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, rel) { 
         obj['rel'] = rel;
     }
 
@@ -55,6 +58,7 @@ class UpdateAction {
             obj = obj || new UpdateAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            UpdateActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('delta')) {
                 obj['delta'] = ApiClient.convertToType(data['delta'], [PairAnyValueAnyValue]);
@@ -94,6 +98,19 @@ UpdateAction.prototype['updates'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement UpdateActionAllOf interface:
+/**
+ * @member {Array.<module:model/PairAnyValueAnyValue>} delta
+ */
+UpdateActionAllOf.prototype['delta'] = undefined;
+/**
+ * @member {module:model/RelKey} rel
+ */
+UpdateActionAllOf.prototype['rel'] = undefined;
+/**
+ * @member {Array.<module:model/PairAnyValueAnyValue>} updates
+ */
+UpdateActionAllOf.prototype['updates'] = undefined;
 
 
 

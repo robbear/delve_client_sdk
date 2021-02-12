@@ -14,6 +14,7 @@
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
 import ActionResult from './ActionResult';
+import CollectProblemsActionResultAllOf from './CollectProblemsActionResultAllOf';
 
 /**
  * The CollectProblemsActionResult model module.
@@ -26,10 +27,11 @@ class CollectProblemsActionResult {
      * @alias module:model/CollectProblemsActionResult
      * @extends module:model/ActionResult
      * @implements module:model/ActionResult
+     * @implements module:model/CollectProblemsActionResultAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        ActionResult.initialize(this, type);
+        ActionResult.initialize(this, type);CollectProblemsActionResultAllOf.initialize(this);
         CollectProblemsActionResult.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class CollectProblemsActionResult {
             obj = obj || new CollectProblemsActionResult();
             ActionResult.constructFromObject(data, obj);
             ActionResult.constructFromObject(data, obj);
+            CollectProblemsActionResultAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('problems')) {
                 obj['problems'] = ApiClient.convertToType(data['problems'], [AbstractProblem]);
@@ -76,6 +79,11 @@ CollectProblemsActionResult.prototype['problems'] = undefined;
  * @default ''
  */
 ActionResult.prototype['type'] = '';
+// Implement CollectProblemsActionResultAllOf interface:
+/**
+ * @member {Array.<module:model/AbstractProblem>} problems
+ */
+CollectProblemsActionResultAllOf.prototype['problems'] = undefined;
 
 
 

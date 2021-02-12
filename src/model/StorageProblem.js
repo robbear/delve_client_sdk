@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
+import IntegrityConstraintProblemAllOf from './IntegrityConstraintProblemAllOf';
 
 /**
  * The StorageProblem model module.
@@ -25,11 +26,13 @@ class StorageProblem {
      * @alias module:model/StorageProblem
      * @extends module:model/AbstractProblem
      * @implements module:model/AbstractProblem
+     * @implements module:model/IntegrityConstraintProblemAllOf
      * @param type {String} 
+     * @param exception {String} 
      */
-    constructor(type) { 
-        AbstractProblem.initialize(this, type);
-        StorageProblem.initialize(this, type);
+    constructor(type, exception) { 
+        AbstractProblem.initialize(this, type);IntegrityConstraintProblemAllOf.initialize(this, exception);
+        StorageProblem.initialize(this, type, exception);
     }
 
     /**
@@ -37,7 +40,7 @@ class StorageProblem {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, exception) { 
         obj['exception'] = exception || '';
     }
 
@@ -53,6 +56,7 @@ class StorageProblem {
             obj = obj || new StorageProblem();
             AbstractProblem.constructFromObject(data, obj);
             AbstractProblem.constructFromObject(data, obj);
+            IntegrityConstraintProblemAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('exception')) {
                 obj['exception'] = ApiClient.convertToType(data['exception'], 'String');
@@ -77,6 +81,12 @@ StorageProblem.prototype['exception'] = '';
  * @default ''
  */
 AbstractProblem.prototype['type'] = '';
+// Implement IntegrityConstraintProblemAllOf interface:
+/**
+ * @member {String} exception
+ * @default ''
+ */
+IntegrityConstraintProblemAllOf.prototype['exception'] = '';
 
 
 

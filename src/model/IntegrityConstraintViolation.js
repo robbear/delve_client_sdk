@@ -14,6 +14,7 @@
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
 import ICViolation from './ICViolation';
+import IntegrityConstraintViolationAllOf from './IntegrityConstraintViolationAllOf';
 
 /**
  * The IntegrityConstraintViolation model module.
@@ -26,10 +27,11 @@ class IntegrityConstraintViolation {
      * @alias module:model/IntegrityConstraintViolation
      * @extends module:model/AbstractProblem
      * @implements module:model/AbstractProblem
+     * @implements module:model/IntegrityConstraintViolationAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        AbstractProblem.initialize(this, type);
+        AbstractProblem.initialize(this, type);IntegrityConstraintViolationAllOf.initialize(this);
         IntegrityConstraintViolation.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class IntegrityConstraintViolation {
             obj = obj || new IntegrityConstraintViolation();
             AbstractProblem.constructFromObject(data, obj);
             AbstractProblem.constructFromObject(data, obj);
+            IntegrityConstraintViolationAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('sources')) {
                 obj['sources'] = ApiClient.convertToType(data['sources'], [ICViolation]);
@@ -76,6 +79,11 @@ IntegrityConstraintViolation.prototype['sources'] = undefined;
  * @default ''
  */
 AbstractProblem.prototype['type'] = '';
+// Implement IntegrityConstraintViolationAllOf interface:
+/**
+ * @member {Array.<module:model/ICViolation>} sources
+ */
+IntegrityConstraintViolationAllOf.prototype['sources'] = undefined;
 
 
 

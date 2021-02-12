@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import CSVFileSchemaAllOf from './CSVFileSchemaAllOf';
 import FileSchema from './FileSchema';
 
 /**
@@ -25,10 +26,11 @@ class CSVFileSchema {
      * @alias module:model/CSVFileSchema
      * @extends module:model/FileSchema
      * @implements module:model/FileSchema
+     * @implements module:model/CSVFileSchemaAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        FileSchema.initialize(this, type);
+        FileSchema.initialize(this, type);CSVFileSchemaAllOf.initialize(this);
         CSVFileSchema.initialize(this, type);
     }
 
@@ -52,6 +54,7 @@ class CSVFileSchema {
             obj = obj || new CSVFileSchema();
             FileSchema.constructFromObject(data, obj);
             FileSchema.constructFromObject(data, obj);
+            CSVFileSchemaAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('types')) {
                 obj['types'] = ApiClient.convertToType(data['types'], ['String']);
@@ -75,6 +78,11 @@ CSVFileSchema.prototype['types'] = undefined;
  * @default ''
  */
 FileSchema.prototype['type'] = '';
+// Implement CSVFileSchemaAllOf interface:
+/**
+ * @member {Array.<String>} types
+ */
+CSVFileSchemaAllOf.prototype['types'] = undefined;
 
 
 

@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import CollectProblemsActionAllOf from './CollectProblemsActionAllOf';
 
 /**
  * The CollectProblemsAction model module.
@@ -25,10 +26,11 @@ class CollectProblemsAction {
      * @alias module:model/CollectProblemsAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/CollectProblemsActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Action.initialize(this, type);
+        Action.initialize(this, type);CollectProblemsActionAllOf.initialize(this);
         CollectProblemsAction.initialize(this, type);
     }
 
@@ -52,13 +54,22 @@ class CollectProblemsAction {
             obj = obj || new CollectProblemsAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            CollectProblemsActionAllOf.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('dummy')) {
+                obj['dummy'] = ApiClient.convertToType(data['dummy'], 'String');
+            }
         }
         return obj;
     }
 
 
 }
+
+/**
+ * @member {String} dummy
+ */
+CollectProblemsAction.prototype['dummy'] = undefined;
 
 
 // Implement Action interface:
@@ -67,6 +78,11 @@ class CollectProblemsAction {
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement CollectProblemsActionAllOf interface:
+/**
+ * @member {String} dummy
+ */
+CollectProblemsActionAllOf.prototype['dummy'] = undefined;
 
 
 

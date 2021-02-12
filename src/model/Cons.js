@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import ConsAllOf from './ConsAllOf';
 import LinkedList from './LinkedList';
 import SyntaxNode from './SyntaxNode';
 
@@ -26,11 +27,14 @@ class Cons {
      * @alias module:model/Cons
      * @extends module:model/LinkedList
      * @implements module:model/LinkedList
+     * @implements module:model/ConsAllOf
      * @param type {String} 
+     * @param head {module:model/SyntaxNode} 
+     * @param tail {module:model/LinkedList} 
      */
-    constructor(type) { 
-        LinkedList.initialize(this, type);
-        Cons.initialize(this, type);
+    constructor(type, head, tail) { 
+        LinkedList.initialize(this, type);ConsAllOf.initialize(this, head, tail);
+        Cons.initialize(this, type, head, tail);
     }
 
     /**
@@ -38,7 +42,7 @@ class Cons {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, head, tail) { 
         obj['head'] = head;
         obj['tail'] = tail;
     }
@@ -55,6 +59,7 @@ class Cons {
             obj = obj || new Cons();
             LinkedList.constructFromObject(data, obj);
             LinkedList.constructFromObject(data, obj);
+            ConsAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('head')) {
                 obj['head'] = SyntaxNode.constructFromObject(data['head']);
@@ -86,6 +91,15 @@ Cons.prototype['tail'] = undefined;
  * @default ''
  */
 LinkedList.prototype['type'] = '';
+// Implement ConsAllOf interface:
+/**
+ * @member {module:model/SyntaxNode} head
+ */
+ConsAllOf.prototype['head'] = undefined;
+/**
+ * @member {module:model/LinkedList} tail
+ */
+ConsAllOf.prototype['tail'] = undefined;
 
 
 

@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import ActionResult from './ActionResult';
+import QueryActionResultAllOf from './QueryActionResultAllOf';
 import Relation from './Relation';
 
 /**
@@ -26,10 +27,11 @@ class QueryActionResult {
      * @alias module:model/QueryActionResult
      * @extends module:model/ActionResult
      * @implements module:model/ActionResult
+     * @implements module:model/QueryActionResultAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        ActionResult.initialize(this, type);
+        ActionResult.initialize(this, type);QueryActionResultAllOf.initialize(this);
         QueryActionResult.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class QueryActionResult {
             obj = obj || new QueryActionResult();
             ActionResult.constructFromObject(data, obj);
             ActionResult.constructFromObject(data, obj);
+            QueryActionResultAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('output')) {
                 obj['output'] = ApiClient.convertToType(data['output'], [Relation]);
@@ -76,6 +79,11 @@ QueryActionResult.prototype['output'] = undefined;
  * @default ''
  */
 ActionResult.prototype['type'] = '';
+// Implement QueryActionResultAllOf interface:
+/**
+ * @member {Array.<module:model/Relation>} output
+ */
+QueryActionResultAllOf.prototype['output'] = undefined;
 
 
 

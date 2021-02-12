@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import ApplAllOf from './ApplAllOf';
 import Range from './Range';
 import SyntaxNode from './SyntaxNode';
 
@@ -26,11 +27,16 @@ class Appl {
      * @alias module:model/Appl
      * @extends module:model/SyntaxNode
      * @implements module:model/SyntaxNode
+     * @implements module:model/ApplAllOf
      * @param type {String} 
+     * @param error {Boolean} 
+     * @param missing {Boolean} 
+     * @param range {module:model/Range} 
+     * @param symbol {String} 
      */
-    constructor(type) { 
-        SyntaxNode.initialize(this, type);
-        Appl.initialize(this, type);
+    constructor(type, error, missing, range, symbol) { 
+        SyntaxNode.initialize(this, type);ApplAllOf.initialize(this, error, missing, range, symbol);
+        Appl.initialize(this, type, error, missing, range, symbol);
     }
 
     /**
@@ -38,7 +44,7 @@ class Appl {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, error, missing, range, symbol) { 
         obj['error'] = error || false;
         obj['missing'] = missing || false;
         obj['range'] = range;
@@ -57,6 +63,7 @@ class Appl {
             obj = obj || new Appl();
             SyntaxNode.constructFromObject(data, obj);
             SyntaxNode.constructFromObject(data, obj);
+            ApplAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('arguments')) {
                 obj['arguments'] = ApiClient.convertToType(data['arguments'], [SyntaxNode]);
@@ -115,6 +122,30 @@ Appl.prototype['symbol'] = '';
  * @default ''
  */
 SyntaxNode.prototype['type'] = '';
+// Implement ApplAllOf interface:
+/**
+ * @member {Array.<module:model/SyntaxNode>} arguments
+ */
+ApplAllOf.prototype['arguments'] = undefined;
+/**
+ * @member {Boolean} error
+ * @default false
+ */
+ApplAllOf.prototype['error'] = false;
+/**
+ * @member {Boolean} missing
+ * @default false
+ */
+ApplAllOf.prototype['missing'] = false;
+/**
+ * @member {module:model/Range} range
+ */
+ApplAllOf.prototype['range'] = undefined;
+/**
+ * @member {String} symbol
+ * @default ''
+ */
+ApplAllOf.prototype['symbol'] = '';
 
 
 

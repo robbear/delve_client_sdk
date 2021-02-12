@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import AbstractProblem from './AbstractProblem';
+import OutputProblemAllOf from './OutputProblemAllOf';
 
 /**
  * The OutputProblem model module.
@@ -25,11 +26,14 @@ class OutputProblem {
      * @alias module:model/OutputProblem
      * @extends module:model/AbstractProblem
      * @implements module:model/AbstractProblem
+     * @implements module:model/OutputProblemAllOf
      * @param type {String} 
+     * @param exception {String} 
+     * @param name {String} 
      */
-    constructor(type) { 
-        AbstractProblem.initialize(this, type);
-        OutputProblem.initialize(this, type);
+    constructor(type, exception, name) { 
+        AbstractProblem.initialize(this, type);OutputProblemAllOf.initialize(this, exception, name);
+        OutputProblem.initialize(this, type, exception, name);
     }
 
     /**
@@ -37,7 +41,7 @@ class OutputProblem {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, exception, name) { 
         obj['exception'] = exception || '';
         obj['name'] = name || '';
     }
@@ -54,6 +58,7 @@ class OutputProblem {
             obj = obj || new OutputProblem();
             AbstractProblem.constructFromObject(data, obj);
             AbstractProblem.constructFromObject(data, obj);
+            OutputProblemAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('exception')) {
                 obj['exception'] = ApiClient.convertToType(data['exception'], 'String');
@@ -95,6 +100,21 @@ OutputProblem.prototype['name'] = '';
  * @default ''
  */
 AbstractProblem.prototype['type'] = '';
+// Implement OutputProblemAllOf interface:
+/**
+ * @member {String} exception
+ * @default ''
+ */
+OutputProblemAllOf.prototype['exception'] = '';
+/**
+ * @member {String} exception_stacktrace
+ */
+OutputProblemAllOf.prototype['exception_stacktrace'] = undefined;
+/**
+ * @member {String} name
+ * @default ''
+ */
+OutputProblemAllOf.prototype['name'] = '';
 
 
 

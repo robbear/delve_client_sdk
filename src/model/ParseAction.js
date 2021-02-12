@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import ParseActionAllOf from './ParseActionAllOf';
 import Source from './Source';
 
 /**
@@ -26,11 +27,14 @@ class ParseAction {
      * @alias module:model/ParseAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/ParseActionAllOf
      * @param type {String} 
+     * @param nonterm {String} 
+     * @param source {module:model/Source} 
      */
-    constructor(type) { 
-        Action.initialize(this, type);
-        ParseAction.initialize(this, type);
+    constructor(type, nonterm, source) { 
+        Action.initialize(this, type);ParseActionAllOf.initialize(this, nonterm, source);
+        ParseAction.initialize(this, type, nonterm, source);
     }
 
     /**
@@ -38,7 +42,7 @@ class ParseAction {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, type) { 
+    static initialize(obj, type, nonterm, source) { 
         obj['nonterm'] = nonterm || '';
         obj['source'] = source;
     }
@@ -55,6 +59,7 @@ class ParseAction {
             obj = obj || new ParseAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            ParseActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('nonterm')) {
                 obj['nonterm'] = ApiClient.convertToType(data['nonterm'], 'String');
@@ -87,6 +92,16 @@ ParseAction.prototype['source'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement ParseActionAllOf interface:
+/**
+ * @member {String} nonterm
+ * @default ''
+ */
+ParseActionAllOf.prototype['nonterm'] = '';
+/**
+ * @member {module:model/Source} source
+ */
+ParseActionAllOf.prototype['source'] = undefined;
 
 
 

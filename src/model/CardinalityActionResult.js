@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import ActionResult from './ActionResult';
+import CardinalityActionResultAllOf from './CardinalityActionResultAllOf';
 import Relation from './Relation';
 
 /**
@@ -26,10 +27,11 @@ class CardinalityActionResult {
      * @alias module:model/CardinalityActionResult
      * @extends module:model/ActionResult
      * @implements module:model/ActionResult
+     * @implements module:model/CardinalityActionResultAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        ActionResult.initialize(this, type);
+        ActionResult.initialize(this, type);CardinalityActionResultAllOf.initialize(this);
         CardinalityActionResult.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class CardinalityActionResult {
             obj = obj || new CardinalityActionResult();
             ActionResult.constructFromObject(data, obj);
             ActionResult.constructFromObject(data, obj);
+            CardinalityActionResultAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('result')) {
                 obj['result'] = ApiClient.convertToType(data['result'], [Relation]);
@@ -76,6 +79,11 @@ CardinalityActionResult.prototype['result'] = undefined;
  * @default ''
  */
 ActionResult.prototype['type'] = '';
+// Implement CardinalityActionResultAllOf interface:
+/**
+ * @member {Array.<module:model/Relation>} result
+ */
+CardinalityActionResultAllOf.prototype['result'] = undefined;
 
 
 

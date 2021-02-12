@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import CollectProblemsActionAllOf from './CollectProblemsActionAllOf';
 import FileSchema from './FileSchema';
 
 /**
@@ -25,10 +26,11 @@ class JSONFileSchema {
      * @alias module:model/JSONFileSchema
      * @extends module:model/FileSchema
      * @implements module:model/FileSchema
+     * @implements module:model/CollectProblemsActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        FileSchema.initialize(this, type);
+        FileSchema.initialize(this, type);CollectProblemsActionAllOf.initialize(this);
         JSONFileSchema.initialize(this, type);
     }
 
@@ -52,13 +54,22 @@ class JSONFileSchema {
             obj = obj || new JSONFileSchema();
             FileSchema.constructFromObject(data, obj);
             FileSchema.constructFromObject(data, obj);
+            CollectProblemsActionAllOf.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('dummy')) {
+                obj['dummy'] = ApiClient.convertToType(data['dummy'], 'String');
+            }
         }
         return obj;
     }
 
 
 }
+
+/**
+ * @member {String} dummy
+ */
+JSONFileSchema.prototype['dummy'] = undefined;
 
 
 // Implement FileSchema interface:
@@ -67,6 +78,11 @@ class JSONFileSchema {
  * @default ''
  */
 FileSchema.prototype['type'] = '';
+// Implement CollectProblemsActionAllOf interface:
+/**
+ * @member {String} dummy
+ */
+CollectProblemsActionAllOf.prototype['dummy'] = undefined;
 
 
 

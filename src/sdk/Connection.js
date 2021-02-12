@@ -1,4 +1,4 @@
-const sdk = require('delve_client_sdk')
+const sdk = require('../index.js');
 
 /** Class representing a Connection. */
 class Connection {
@@ -112,4 +112,4 @@ class Connection {
     }
 }
 
-module.exports = { Connection: Connection }
+module.exports = Connection

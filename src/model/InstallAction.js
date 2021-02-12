@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Action from './Action';
+import InstallActionAllOf from './InstallActionAllOf';
 import Source from './Source';
 
 /**
@@ -26,10 +27,11 @@ class InstallAction {
      * @alias module:model/InstallAction
      * @extends module:model/Action
      * @implements module:model/Action
+     * @implements module:model/InstallActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        Action.initialize(this, type);
+        Action.initialize(this, type);InstallActionAllOf.initialize(this);
         InstallAction.initialize(this, type);
     }
 
@@ -53,6 +55,7 @@ class InstallAction {
             obj = obj || new InstallAction();
             Action.constructFromObject(data, obj);
             Action.constructFromObject(data, obj);
+            InstallActionAllOf.constructFromObject(data, obj);
 
             if (data.hasOwnProperty('sources')) {
                 obj['sources'] = ApiClient.convertToType(data['sources'], [Source]);
@@ -76,6 +79,11 @@ InstallAction.prototype['sources'] = undefined;
  * @default ''
  */
 Action.prototype['type'] = '';
+// Implement InstallActionAllOf interface:
+/**
+ * @member {Array.<module:model/Source>} sources
+ */
+InstallActionAllOf.prototype['sources'] = undefined;
 
 
 

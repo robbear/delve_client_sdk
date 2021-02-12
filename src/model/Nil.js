@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import CollectProblemsActionAllOf from './CollectProblemsActionAllOf';
 import LinkedList from './LinkedList';
 
 /**
@@ -25,10 +26,11 @@ class Nil {
      * @alias module:model/Nil
      * @extends module:model/LinkedList
      * @implements module:model/LinkedList
+     * @implements module:model/CollectProblemsActionAllOf
      * @param type {String} 
      */
     constructor(type) { 
-        LinkedList.initialize(this, type);
+        LinkedList.initialize(this, type);CollectProblemsActionAllOf.initialize(this);
         Nil.initialize(this, type);
     }
 
@@ -52,13 +54,22 @@ class Nil {
             obj = obj || new Nil();
             LinkedList.constructFromObject(data, obj);
             LinkedList.constructFromObject(data, obj);
+            CollectProblemsActionAllOf.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('dummy')) {
+                obj['dummy'] = ApiClient.convertToType(data['dummy'], 'String');
+            }
         }
         return obj;
     }
 
 
 }
+
+/**
+ * @member {String} dummy
+ */
+Nil.prototype['dummy'] = undefined;
 
 
 // Implement LinkedList interface:
@@ -67,6 +78,11 @@ class Nil {
  * @default ''
  */
 LinkedList.prototype['type'] = '';
+// Implement CollectProblemsActionAllOf interface:
+/**
+ * @member {String} dummy
+ */
+CollectProblemsActionAllOf.prototype['dummy'] = undefined;
 
 
 

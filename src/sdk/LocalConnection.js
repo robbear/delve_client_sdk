@@ -46,7 +46,7 @@ class LocalConnection extends Connection {
     /**
      * Return cardinality of relations in Delve db `dbname`
      * @param {string} relname - Name of relation.
-     * @return {Promise}
+     * @return {Object} - {result, problems}
      */
     cardinality(relname) {
         return new Promise((resolve, reject) => {
@@ -65,13 +65,13 @@ class LocalConnection extends Connection {
                     const problems = tr.problems;
                     resolve({result, problems})
                 })
-                .catch(reject)
+                .catch(error => reject(error))
         })
     }
 
     /**
      * Create a Delve database
-     * @return {Promise}
+     * @return {Object} - {problems}
      */
     create_database() {
         return new Promise((resolve, reject) => {
@@ -87,7 +87,7 @@ class LocalConnection extends Connection {
                 } else {
                     const problems = transactionResult.problems;
                     this.defaultOpenMode = 'OPEN'
-                    resolve({transactionResult, problems})
+                    resolve({problems})
                 }
             })
         })
@@ -96,7 +96,7 @@ class LocalConnection extends Connection {
     /**
      * Delete a Delve source
      * @param {string} sourceName - Name of source.
-     * @return {Promise}
+     * @return {Object} - {problems}
      */
     delete_source(sourceName) {
         if (typeof sourceName === 'undefined' || sourceName === '') {
@@ -113,9 +113,9 @@ class LocalConnection extends Connection {
                 .then(res => {
                     const tr = res.transactionResult;
                     const problems = tr.problems;
-                    resolve({tr, problems});
+                    resolve({problems});
                 })
-                .catch(reject)
+                .catch(error => reject(error))
         })
     }
 
@@ -123,7 +123,7 @@ class LocalConnection extends Connection {
      * Install a Delve source
      * @param {string} sourceName - Name of source.
      * @param {string} sourceStr - Delve relations to install
-     * @return {Promise}
+     * @return {Object} - {problems}
      */
     install_source(sourceName, sourceStr) {
         if (typeof sourceStr === 'undefined' || sourceStr === '') {
@@ -145,16 +145,16 @@ class LocalConnection extends Connection {
                 .then(res => {
                     const tr = res.transactionResult;
                     const problems = tr.problems;
-                    resolve({tr, problems});
+                    resolve({problems});
                 })
-                .catch(reject)
+                .catch(error => reject(error))
         })
     }
 
     /**
      * List Extensional Databases (EDBs) in Delve db `dbname`
      * @params {string} relname - Name of relation.
-     * @return {Promise}
+     * @return {Object} - {rels, problems}
      */
     list_edb(relname) {
         return new Promise((resolve, reject) => { 
@@ -172,13 +172,13 @@ class LocalConnection extends Connection {
                     const rels = tr.actions[0].result.rels;
                     resolve({rels, problems});
                 })
-                .catch(reject)
+                .catch(error => reject(error))
         })
     }
 
     /**
      * List sources installed in Delve
-     * @return {Promise}
+     * @return {Object} - {sources, problems}
      */
     list_source() {
         return new Promise((resolve, reject) => {
@@ -194,7 +194,7 @@ class LocalConnection extends Connection {
                     const problems = tr.problems;
                     resolve({sources, problems});
                 })
-                .catch(reject)
+                .catch(error => reject(error))
         })
     }
 
@@ -219,7 +219,7 @@ class LocalConnection extends Connection {
      * @param {string} [params.path=''] -
      * @param {string[]} [params.inputs=[]] -
      * @param {string[]} [params.persist=[]] - Name(s) of relation(s) to persist.
-     * @return {Promise}
+     * @return {Object} - {output, problems}
      */
     query(params) {
         // Check if `outputs` is valid, exit if not.
@@ -254,7 +254,7 @@ class LocalConnection extends Connection {
                     const problems = tr.problems;
                     resolve({output, problems});
                 })
-                .catch(reject)
+                .catch(error => reject(error))
         })
     }
 

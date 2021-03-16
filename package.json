@@ -1,7 +1,7 @@
 {
   "name": "delve_client_sdk",
-  "version": "1.0.0",
-  "rai-rel-protocol": "1.1.8",
+  "version": "1.0.1",
+  "rai-rel-protocol": "1.2.0",
   "description": "This_is_a_Client_SDK_for_Delve_API",
   "license": "Apache 2.0",
   "main": "src/index.js",

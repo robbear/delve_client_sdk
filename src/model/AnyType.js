@@ -22,11 +22,11 @@ class AnyType {
     /**
      * Constructs a new <code>AnyType</code>.
      * @alias module:model/AnyType
-     * @param target_value {Number} 
-     * @param type {module:model/AnyType.TypeEnum} 
+     * @param target_value {Number}
+     * @param type {module:model/AnyType.TypeEnum}
      */
-    constructor(target_value, type) { 
-        
+    constructor(target_value, type) {
+
         AnyType.initialize(this, target_value, type);
     }
 
@@ -35,7 +35,7 @@ class AnyType {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, target_value, type) { 
+    static initialize(obj, target_value, type) {
         obj['target_value'] = target_value || null;
         obj['type'] = type || 'AnyType';
     }
@@ -48,7 +48,7 @@ class AnyType {
      * @return {module:model/AnyType} The populated <code>AnyType</code> instance.
      */
     static constructFromObject(data, obj) {
-        if (data) {
+        if (data && typeof data === 'object') {
             obj = obj || new AnyType();
 
             if (data.hasOwnProperty('target_value')) {
@@ -57,10 +57,13 @@ class AnyType {
             if (data.hasOwnProperty('type')) {
                 obj['type'] = ApiClient.convertToType(data['type'], 'String');
             }
-        }
-        return obj;
-    }
 
+            return obj;
+        }
+        else {
+            return data;
+        }
+    }
 
 }
 

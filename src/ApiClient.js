@@ -470,7 +470,7 @@ class ApiClient {
         request.end((error, response) => {
             if (callback) {
                 var data = null;
-                if (!error) {
+                if (response && response.text) {
                     try {
                         data = this.deserialize(response, returnType);
                         if (this.enableCookies && typeof window === 'undefined'){

@@ -113,6 +113,11 @@ import UpdateActionResult from './model/UpdateActionResult';
 import WorkspaceLoadProblem from './model/WorkspaceLoadProblem';
 import DefaultApi from './api/DefaultApi';
 
+import ConnectionBase from './sdk/ConnectionBase';
+import Connection from './sdk/Connection';
+import LocalConnection from './sdk/LocalConnection';
+import RelAPIMixin from './sdk/RelAPIMixin';
+
 
 /**
 * This_is_a_Client_SDK_for_Delve_API.<br>
@@ -744,5 +749,29 @@ export {
     * The DefaultApi service constructor.
     * @property {module:api/DefaultApi}
     */
-    DefaultApi
+    DefaultApi,
+
+    /**
+     * The ConnectionBase sdk constructor.
+     * @property {module:sdk/ConnectionBase}
+     */
+    ConnectionBase,
+
+    /**
+     * The Connection sdk constructor.
+     * @property {module:sdk/Connection}
+     */
+     Connection,
+
+    /**
+     * The LocalConnection sdk constructor.
+     * @property {module:sdk/LocalConnection}
+     */
+    LocalConnection,
+
+    /**
+     * The RelAPIMixin sdk constructor.
+     * @property {module:sdk/RelAPIMixin}
+     */
+    RelAPIMixin
 };

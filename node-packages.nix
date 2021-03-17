@@ -3091,6 +3091,15 @@ let
         sha512 = "Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==";
       };
     };
+    "safe-buffer-5.2.1" = {
+      name = "safe-buffer";
+      packageName = "safe-buffer";
+      version = "5.2.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz";
+        sha512 = "rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==";
+      };
+    };
     "safe-regex-1.1.0" = {
       name = "safe-regex";
       packageName = "safe-regex";
@@ -3287,6 +3296,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/string_decoder/-/string_decoder-1.1.1.tgz";
         sha512 = "n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==";
+      };
+    };
+    "string_decoder-1.3.0" = {
+      name = "string_decoder";
+      packageName = "string_decoder";
+      version = "1.3.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz";
+        sha512 = "hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==";
       };
     };
     "strip-ansi-4.0.0" = {
@@ -3607,8 +3625,6 @@ let
       sources."@babel/compat-data-7.13.11"
       (sources."@babel/core-7.13.10" // {
         dependencies = [
-          sources."debug-4.3.1"
-          sources."ms-2.1.2"
           sources."semver-6.3.0"
         ];
       })
@@ -3624,8 +3640,6 @@ let
       sources."@babel/helper-create-regexp-features-plugin-7.12.17"
       (sources."@babel/helper-define-polyfill-provider-0.1.5" // {
         dependencies = [
-          sources."debug-4.3.1"
-          sources."ms-2.1.2"
           sources."semver-6.3.0"
         ];
       })
@@ -3730,12 +3744,7 @@ let
       sources."@babel/register-7.13.8"
       sources."@babel/runtime-7.13.10"
       sources."@babel/template-7.12.13"
-      (sources."@babel/traverse-7.13.0" // {
-        dependencies = [
-          sources."debug-4.3.1"
-          sources."ms-2.1.2"
-        ];
-      })
+      sources."@babel/traverse-7.13.0"
       sources."@babel/types-7.13.0"
       sources."@nicolo-ribaudo/chokidar-2-2.1.8-no-fsevents"
       sources."@sinonjs/commons-1.8.2"
@@ -3828,7 +3837,11 @@ let
       sources."commondir-1.0.1"
       sources."component-emitter-1.3.0"
       sources."concat-map-0.0.1"
-      sources."convert-source-map-1.7.0"
+      (sources."convert-source-map-1.7.0" // {
+        dependencies = [
+          sources."safe-buffer-5.1.2"
+        ];
+      })
       sources."cookiejar-2.1.2"
       sources."copy-descriptor-0.1.1"
       (sources."core-js-compat-3.9.1" // {
@@ -3837,7 +3850,7 @@ let
         ];
       })
       sources."core-util-is-1.0.2"
-      sources."debug-2.6.9"
+      sources."debug-4.3.1"
       sources."decamelize-4.0.0"
       sources."decode-uri-component-0.2.0"
       sources."define-properties-1.1.3"
@@ -3857,8 +3870,10 @@ let
       sources."esutils-2.0.3"
       (sources."expand-brackets-2.1.4" // {
         dependencies = [
+          sources."debug-2.6.9"
           sources."define-property-0.2.5"
           sources."extend-shallow-2.0.1"
+          sources."ms-2.0.0"
         ];
       })
       sources."expect.js-0.3.1"
@@ -3972,7 +3987,11 @@ let
       })
       sources."lolex-4.2.0"
       sources."lru-cache-6.0.0"
-      sources."make-dir-2.1.0"
+      (sources."make-dir-2.1.0" // {
+        dependencies = [
+          sources."semver-5.7.1"
+        ];
+      })
       sources."map-cache-0.2.2"
       sources."map-visit-1.0.0"
       sources."methods-1.1.2"
@@ -3989,11 +4008,6 @@ let
       })
       (sources."mocha-8.3.2" // {
         dependencies = [
-          (sources."debug-4.3.1" // {
-            dependencies = [
-              sources."ms-2.1.2"
-            ];
-          })
           sources."escape-string-regexp-4.0.0"
           sources."find-up-5.0.0"
           sources."has-flag-4.0.0"
@@ -4005,7 +4019,7 @@ let
           sources."supports-color-8.1.1"
         ];
       })
-      sources."ms-2.0.0"
+      sources."ms-2.1.2"
       sources."nanoid-3.1.20"
       sources."nanomatch-1.2.13"
       (sources."nise-1.5.3" // {
@@ -4048,8 +4062,14 @@ let
       sources."process-nextick-args-2.0.1"
       sources."qs-6.9.6"
       sources."randombytes-2.1.0"
-      sources."readable-stream-2.3.7"
-      sources."readdirp-2.2.1"
+      sources."readable-stream-3.6.0"
+      (sources."readdirp-2.2.1" // {
+        dependencies = [
+          sources."readable-stream-2.3.7"
+          sources."safe-buffer-5.1.2"
+          sources."string_decoder-1.1.1"
+        ];
+      })
       sources."regenerate-1.4.2"
       sources."regenerate-unicode-properties-8.2.0"
       sources."regenerator-runtime-0.13.7"
@@ -4069,9 +4089,9 @@ let
       sources."resolve-1.20.0"
       sources."resolve-url-0.2.1"
       sources."ret-0.1.15"
-      sources."safe-buffer-5.1.2"
+      sources."safe-buffer-5.2.1"
       sources."safe-regex-1.1.0"
-      sources."semver-5.7.1"
+      sources."semver-7.3.4"
       sources."serialize-javascript-5.0.1"
       (sources."set-value-2.0.1" // {
         dependencies = [
@@ -4086,8 +4106,10 @@ let
       sources."slash-2.0.0"
       (sources."snapdragon-0.8.2" // {
         dependencies = [
+          sources."debug-2.6.9"
           sources."define-property-0.2.5"
           sources."extend-shallow-2.0.1"
+          sources."ms-2.0.0"
         ];
       })
       (sources."snapdragon-node-2.1.1" // {
@@ -4118,17 +4140,10 @@ let
         ];
       })
       sources."string-width-2.1.1"
-      sources."string_decoder-1.1.1"
+      sources."string_decoder-1.3.0"
       sources."strip-ansi-4.0.0"
       sources."strip-json-comments-3.1.1"
-      (sources."superagent-5.3.1" // {
-        dependencies = [
-          sources."debug-4.3.1"
-          sources."ms-2.1.2"
-          sources."readable-stream-3.6.0"
-          sources."semver-7.3.4"
-        ];
-      })
+      sources."superagent-5.3.1"
       sources."supports-color-5.5.0"
       sources."to-fast-properties-2.0.0"
       (sources."to-object-path-0.3.0" // {

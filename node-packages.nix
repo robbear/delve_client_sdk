@@ -2902,6 +2902,15 @@ let
         sha512 = "TIRk4aqYLNoJUbd+g2lEdz5kLWIuTMRagAXxl78Q0RiVjAOugHmeKNGdd3cwo/ktpf9aL9epCfFqWDEKysUlLQ==";
       };
     };
+    "querystring-0.2.1" = {
+      name = "querystring";
+      packageName = "querystring";
+      version = "0.2.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/querystring/-/querystring-0.2.1.tgz";
+        sha512 = "wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==";
+      };
+    };
     "randombytes-2.1.0" = {
       name = "randombytes";
       packageName = "randombytes";
@@ -3334,13 +3343,13 @@ let
         sha512 = "6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==";
       };
     };
-    "superagent-5.3.1" = {
+    "superagent-6.1.0" = {
       name = "superagent";
       packageName = "superagent";
-      version = "5.3.1";
+      version = "6.1.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/superagent/-/superagent-5.3.1.tgz";
-        sha512 = "wjJ/MoTid2/RuGCOFtlacyGNxN9QLMgcpYLDQlWFIhhdJ93kNscFonGvrpAHSCVjRVj++DGCglocF7Aej1KHvQ==";
+        url = "https://registry.npmjs.org/superagent/-/superagent-6.1.0.tgz";
+        sha512 = "OUDHEssirmplo3F+1HWKUrUjvnQuA+nZI6i/JJBdXb5eq9IyEQwPyPpqND+SSsxf6TygpBEkUjISVRN4/VOpeg==";
       };
     };
     "supports-color-5.5.0" = {
@@ -3615,9 +3624,9 @@ let
     };
   };
   args = {
-    name = "rai_db_sdk";
-    packageName = "rai_db_sdk";
-    version = "1.1.3";
+    name = "relationalai-sdk";
+    packageName = "relationalai-sdk";
+    version = "1.0.0";
     src = ./.;
     dependencies = [
       sources."@babel/cli-7.13.10"
@@ -4061,6 +4070,7 @@ let
       sources."posix-character-classes-0.1.1"
       sources."process-nextick-args-2.0.1"
       sources."qs-6.9.6"
+      sources."querystring-0.2.1"
       sources."randombytes-2.1.0"
       sources."readable-stream-3.6.0"
       (sources."readdirp-2.2.1" // {
@@ -4143,7 +4153,7 @@ let
       sources."string_decoder-1.3.0"
       sources."strip-ansi-4.0.0"
       sources."strip-json-comments-3.1.1"
-      sources."superagent-5.3.1"
+      sources."superagent-6.1.0"
       sources."supports-color-5.5.0"
       sources."to-fast-properties-2.0.0"
       (sources."to-object-path-0.3.0" // {
@@ -4204,7 +4214,7 @@ let
     ];
     buildInputs = globalBuildInputs;
     meta = {
-      description = "This_is_a_Client_SDK_for_Delve_API";
+      description = "RelationalAI SDK for JavaScript";
       license = "Apache 2.0";
     };
     production = false;

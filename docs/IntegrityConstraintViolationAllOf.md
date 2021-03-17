@@ -1,9 +1,9 @@
-# RaiDbSdk.StatusAction
+# RaiDbSdk.IntegrityConstraintViolationAllOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dummy** | **String** |  | [optional] 
+**sources** | [**[ICViolation]**](ICViolation.md) |  | [optional] 
 
 

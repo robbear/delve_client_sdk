@@ -1,9 +1,9 @@
-# RaiDbSdk.StatusAction
+# RaiDbSdk.ModifyWorkspaceActionResultAllOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dummy** | **String** |  | [optional] 
+**deleteEdbResult** | [**[RelKey]**](RelKey.md) |  | [optional] 
 
 

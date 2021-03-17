@@ -1,9 +1,9 @@
-# RaiDbSdk.StatusAction
+# RaiDbSdk.CardinalityActionAllOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dummy** | **String** |  | [optional] 
+**relname** | **String** |  | [optional] 
 
 

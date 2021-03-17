@@ -1,9 +1,9 @@
-# RaiDbSdk.StatusAction
+# RaiDbSdk.ListEdbActionResultAllOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dummy** | **String** |  | [optional] 
+**rels** | [**[RelKey]**](RelKey.md) |  | [optional] 
 
 

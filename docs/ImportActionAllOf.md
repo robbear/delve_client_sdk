@@ -1,9 +1,9 @@
-# RaiDbSdk.StatusAction
+# RaiDbSdk.ImportActionAllOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dummy** | **String** |  | [optional] 
+**inputs** | [**[Relation]**](Relation.md) |  | [optional] 
 
 

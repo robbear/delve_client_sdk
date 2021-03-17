@@ -1,4 +1,4 @@
-# RaiDbSdk.SetOptionsAction
+# RaiDbSdk.SetOptionsActionAllOf
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# RaiDbSdk.StatusAction
+# RaiDbSdk.CollectProblemsActionAllOf
 
 ## Properties
 

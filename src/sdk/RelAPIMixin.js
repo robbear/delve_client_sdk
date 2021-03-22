@@ -4,6 +4,8 @@ import {
   LabeledAction,
   ListEdbAction,
   ListSourceAction,
+  LoadData,
+  LoadDataAction,
   ModifyWorkspaceAction,
   QueryAction,
   Source,
@@ -172,6 +174,30 @@ function RelAPIMixin(Base) {
     }
 
     /**
+     *
+     * @param {String} name - Name for this action
+     * @param {String} data - String data in JSON format
+     * @param {String} path - Path or url to JSON file if `data` is null
+     * @param {String} relname - Relation name
+     * @param {Array} key - Array of values representing Rel keys
+     * @returns {LabledAction}
+     */
+     loadDataAction(name, data, path, relname) {
+      let loadData = new LoadData();
+      loadData.content_type = 'application/json';
+      loadData.data = data;
+      loadData.path = path;
+      loadData.key = [];
+
+      let action = new LoadDataAction();
+      action.rel = relname;
+      action.value = loadData;
+      action.type = 'LoadDataAction';
+
+      return this.createLabeledAction(name, action)
+    }
+
+    /**
      * Query the database `dbname`
      *
      * @param {String} dbname - The database to connect to
@@ -325,6 +351,28 @@ function RelAPIMixin(Base) {
       return this.runAction(dbname, action, true, Transaction.ModeEnum.OPEN);
     }
 
+    /**
+     * Import a JSON string or a JSON file
+     * Deprecated - Use the language-internal query instead.
+     *
+     * @param {String} dbname - The name of the database
+     * @param {String} data - A JSON-formatted string or the path to a JSON file
+     * @param {String} relname - The relation name to use for referencing the JSON data
+     * @returns {Promise} - Resolves to object: {error, result, response} where
+     * `result` is a `TransactionResult`.
+     */
+    loadJSON(dbname, data, relname, actionName = 'action') {
+      console.warn('loadJSON is deprecated. Use the language-internal query instead.');
+
+      const isJSON = this._isJSONString(data);
+      const json = isJSON ? data : null;
+      const path = isJSON ? null : data;
+
+      const action = this.loadDataAction(actionName, json, path, relname);
+
+      return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
+    }
+
     //
     // Internal helper calling `transactionPost` while managing
     // the transaction version.
@@ -343,6 +391,20 @@ function RelAPIMixin(Base) {
       catch(e) {
         reject(e);
       }
+    }
+
+    _isJSONString(str) {
+      try {
+        let obj = JSON.parse(str);
+
+        if (obj && typeof obj === 'object') {
+          return true;
+        }
+      }
+      catch (e) {
+      }
+
+      return false;
     }
   }
 

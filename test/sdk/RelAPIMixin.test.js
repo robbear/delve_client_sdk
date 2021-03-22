@@ -1,4 +1,6 @@
 const assert = require('assert');
+const fs = require('fs').promises;
+const os = require('os');
 import LocalConnection from '../../src/sdk/LocalConnection.js';
 
 const defaultSources = ["intrinsics", "stdlib", "ml"];
@@ -423,6 +425,116 @@ describe('RelAPIMixin', () => {
           }
         }
         assert(match);
+      });
+    }).timeout(60000);
+  });
+
+  describe('#loadJSON from data', () => {
+    const dbname = createUniqueName('db');
+    initializeDatabase(dbname);
+
+    const relname = 'people';
+    const jsonString = JSON.stringify({
+      name: {
+        first: "William",
+        last: "Shakespeare"
+      },
+      age: 100
+    });
+
+    const tempFileName = `${os.tmpdir()}/${dbname}.json`;
+
+    it(`loads the JSON string, ${jsonString}`, () => {
+      return lc.loadJSON(dbname, jsonString, relname).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+      });
+    }).timeout(60000);
+    it(`finds the relation that was loaded`, () => {
+      return lc.query(dbname, `def output=${relname}`).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+        assert.notStrictEqual(res.result.output, null);
+        assert.strictEqual(res.result.output.length, 3);
+      });
+    }).timeout(60000);
+    it(`queries to export_json to ${tempFileName}`, () => {
+      return lc.query(dbname, `def export=export_json[(:path, "${tempFileName}");(:data,${relname})]`).then(res => {
+        assert.strictEqual(res.error, null);
+      });
+    }).timeout(60000);
+    it(`loads the expected JSON from file ${tempFileName}`, () => {
+      return fs.readFile(tempFileName, 'utf-8').then(result => {
+        let json;
+        try {
+          json = JSON.parse(result);
+        }
+        catch(e) {
+          assert.notStrictEqual('The loaded JSON does not parse', null);
+        }
+        const jsonInput = JSON.parse(jsonString);
+        assert.strictEqual(json.name.first, jsonInput.name.first);
+        assert.strictEqual(json.name.last, jsonInput.name.last);
+        assert.strictEqual(json.age, jsonInput.age);
+      });
+    }).timeout(60000);
+  });
+
+  describe('#loadJSON from path', () => {
+    const dbname = createUniqueName('db');
+    initializeDatabase(dbname);
+
+    const relname = 'people';
+    const jsonString = JSON.stringify({
+      name: {
+        first: "William",
+        last: "Shakespeare"
+      },
+      age: 100
+    });
+
+    const tempFileName = `${os.tmpdir()}/${dbname}.json`;
+    const tempFileName1 = `${os.tmpdir()}/${dbname}1.json`;
+
+    it(`writes the JSON string to temp file ${tempFileName}`, () => {
+      return fs.writeFile(tempFileName, jsonString).then(() => {
+        assert(true);
+      }).catch(error => {
+        assert.strictEqual(error, null);
+      });
+    }).timeout(60000);
+    it(`loads the JSON file, ${tempFileName}`, () => {
+      return lc.loadJSON(dbname, tempFileName, relname).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+      });
+    }).timeout(60000);
+    it(`finds the relation that was loaded`, () => {
+      return lc.query(dbname, `def output=${relname}`).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+        assert.notStrictEqual(res.result.output, null);
+        assert.strictEqual(res.result.output.length, 3);
+      });
+    }).timeout(60000);
+    it(`queries to export_json to ${tempFileName1}`, () => {
+      return lc.query(dbname, `def export=export_json[(:path, "${tempFileName1}");(:data,${relname})]`).then(res => {
+        assert.strictEqual(res.error, null);
+      });
+    }).timeout(60000);
+    it(`loads the expected JSON from file ${tempFileName1}`, () => {
+      return fs.readFile(tempFileName1, 'utf-8').then(result => {
+        let json;
+        try {
+          json = JSON.parse(result);
+        }
+        catch(e) {
+          assert.notStrictEqual('The loaded JSON does not parse', null);
+        }
+        const jsonInput = JSON.parse(jsonString);
+        assert.strictEqual(json.name.first, jsonInput.name.first);
+        assert.strictEqual(json.name.last, jsonInput.name.last);
+        assert.strictEqual(json.age, jsonInput.age);
       });
     }).timeout(60000);
   });

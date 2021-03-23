@@ -356,19 +356,16 @@ function RelAPIMixin(Base) {
      * Deprecated - Use the language-internal query instead.
      *
      * @param {String} dbname - The name of the database
-     * @param {String} data - A JSON-formatted string or the path to a JSON file
+     * @param {String} data - A string representing the JSON to import. Provide either `data` or `path`
+     * @param {String} path - Path to a JSON file. Provide either `data` or `path`
      * @param {String} relname - The relation name to use for referencing the JSON data
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    loadJSON(dbname, data, relname, actionName = 'action') {
+    loadJSON(dbname, data, path, relname, actionName = 'action') {
       console.warn('loadJSON is deprecated. Use the language-internal query instead.');
 
-      const isJSON = this._isJSONString(data);
-      const json = isJSON ? data : null;
-      const path = isJSON ? null : data;
-
-      const action = this.loadDataAction(actionName, json, path, relname);
+      const action = this.loadDataAction(actionName, data, path, relname);
 
       return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
     }
@@ -391,20 +388,6 @@ function RelAPIMixin(Base) {
       catch(e) {
         reject(e);
       }
-    }
-
-    _isJSONString(str) {
-      try {
-        let obj = JSON.parse(str);
-
-        if (obj && typeof obj === 'object') {
-          return true;
-        }
-      }
-      catch (e) {
-      }
-
-      return false;
     }
   }
 

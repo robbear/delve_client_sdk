@@ -445,7 +445,7 @@ describe('RelAPIMixin', () => {
     const tempFileName = `${os.tmpdir()}/${dbname}.json`;
 
     it(`loads the JSON string, ${jsonString}`, () => {
-      return lc.loadJSON(dbname, jsonString, relname).then(res => {
+      return lc.loadJSON(dbname, jsonString, null, relname).then(res => {
         assert.strictEqual(res.error, null);
         assert.strictEqual(res.result.problems.length, 0);
       });
@@ -504,7 +504,7 @@ describe('RelAPIMixin', () => {
       });
     }).timeout(60000);
     it(`loads the JSON file, ${tempFileName}`, () => {
-      return lc.loadJSON(dbname, tempFileName, relname).then(res => {
+      return lc.loadJSON(dbname, null, tempFileName, relname).then(res => {
         assert.strictEqual(res.error, null);
         assert.strictEqual(res.result.problems.length, 0);
       });

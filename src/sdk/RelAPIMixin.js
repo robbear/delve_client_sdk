@@ -174,15 +174,15 @@ function RelAPIMixin(Base) {
     }
 
     /**
+     * Constructs an action to load JSON data
      *
      * @param {String} name - Name for this action
      * @param {String} data - String data in JSON format
      * @param {String} path - Path or url to JSON file if `data` is null
      * @param {String} relname - Relation name
-     * @param {Array} key - Array of values representing Rel keys
      * @returns {LabledAction}
      */
-     loadDataAction(name, data, path, relname) {
+     loadJSONAction(name, data, path, relname) {
       let loadData = new LoadData();
       loadData.content_type = 'application/json';
       loadData.data = data;
@@ -365,7 +365,7 @@ function RelAPIMixin(Base) {
     loadJSON(dbname, data, path, relname, actionName = 'action') {
       console.warn('loadJSON is deprecated. Use the language-internal query instead.');
 
-      const action = this.loadDataAction(actionName, data, path, relname);
+      const action = this.loadJSONAction(actionName, data, path, relname);
 
       return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
     }

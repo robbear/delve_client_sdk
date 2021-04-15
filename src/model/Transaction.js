@@ -26,12 +26,13 @@ class Transaction {
      * @param abort {Boolean} 
      * @param dbname {String} 
      * @param mode {module:model/Transaction.ModeEnum} 
+     * @param nowaitDurable {Boolean} 
      * @param readonly {Boolean} 
      * @param type {module:model/Transaction.TypeEnum} 
      */
-    constructor(abort, dbname, mode, readonly, type) { 
+    constructor(abort, dbname, mode, nowaitDurable, readonly, type) { 
         
-        Transaction.initialize(this, abort, dbname, mode, readonly, type);
+        Transaction.initialize(this, abort, dbname, mode, nowaitDurable, readonly, type);
     }
 
     /**
@@ -39,10 +40,11 @@ class Transaction {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, abort, dbname, mode, readonly, type) { 
+    static initialize(obj, abort, dbname, mode, nowaitDurable, readonly, type) { 
         obj['abort'] = abort || false;
         obj['dbname'] = dbname || '';
         obj['mode'] = mode || 'OPEN';
+        obj['nowait_durable'] = nowaitDurable || false;
         obj['readonly'] = readonly || false;
         obj['type'] = type || 'Transaction';
     }
@@ -72,6 +74,9 @@ class Transaction {
             }
             if (data.hasOwnProperty('mode')) {
                 obj['mode'] = ApiClient.convertToType(data['mode'], 'String');
+            }
+            if (data.hasOwnProperty('nowait_durable')) {
+                obj['nowait_durable'] = ApiClient.convertToType(data['nowait_durable'], 'Boolean');
             }
             if (data.hasOwnProperty('readonly')) {
                 obj['readonly'] = ApiClient.convertToType(data['readonly'], 'Boolean');
@@ -119,6 +124,12 @@ Transaction.prototype['debug_level'] = undefined;
  * @default 'OPEN'
  */
 Transaction.prototype['mode'] = 'OPEN';
+
+/**
+ * @member {Boolean} nowait_durable
+ * @default false
+ */
+Transaction.prototype['nowait_durable'] = false;
 
 /**
  * @member {Boolean} readonly

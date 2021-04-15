@@ -262,6 +262,107 @@ describe('RelAPIMixin', () => {
     }).timeout(60000);
   });
 
+  describe('#query with inputs', () => {
+    const dbname = createUniqueName('db');
+    initializeDatabase(dbname);
+
+    const queryString1 = 'def p2={10} def r=sum[p1*p2]';
+
+    // Represents `def p = [1,2]`
+    const inputs1 = [
+      {
+        "rel_key": {
+          "values": [],
+          "name": "p1",
+          "keys": ["Int64"],
+          "type": "RelKey"
+        },
+        "type": "Relation",
+        "columns": [[1,2]]
+      }
+    ];
+
+    const NOTEBOOK_RELATION = 'nb';
+    const notebookName = 'myNotebook';
+    const property = 'testProperty';
+    const cellId = 'id_20';
+    const initialValue = 'initial data value';
+    const value = 'test data value';
+    const queryString2 = `
+      def previousValue = ${NOTEBOOK_RELATION}[query_notebook_name, :cells, query_cell_id, :${property}]
+      def delete[:${NOTEBOOK_RELATION}] = (query_notebook_name, :cells, query_cell_id, :${property}, previousValue)
+      def insert[:${NOTEBOOK_RELATION}] = (query_notebook_name, :cells, query_cell_id, :${property}, query_value)
+    `;
+    const queryString2Init = `def insert[:${NOTEBOOK_RELATION}] = ("${notebookName}", :cells, "${cellId}", :${property}, "${initialValue}")`;
+
+    const inputs2 = [
+      {
+        rel_key: {
+          values: ["DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}"],
+          name: 'query_cell_id',
+          keys: [],
+          type: 'RelKey',
+        },
+        type: 'Relation',
+        columns: [[cellId]],
+      },
+      {
+        rel_key: {
+          values: ["DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}"],
+          name: 'query_value',
+          keys: [],
+          type: 'RelKey',
+        },
+        type: 'Relation',
+        columns: [[value]],
+      },
+      {
+        rel_key: {
+          values: ["DelveFixedSizeStrings.FixedSizeString{DelveFixedSizeStrings.Str128}"],
+          name: 'query_notebook_name',
+          keys: [],
+          type: 'RelKey',
+        },
+        type: 'Relation',
+        columns: [[notebookName]],
+      }
+    ];
+
+    it(`should query '${queryString1}' with input relationship 'def p1=[1,2]'`, () => {
+      return lc.query(dbname, queryString1, true, ['r'], inputs1).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+        assert.strictEqual(res.result.actions[0].result.output[0].columns[0][0], 30);
+      });
+    }).timeout(60000);
+    it(`should insert "${queryString2Init}"`, () => {
+      return lc.query(dbname, queryString2Init, false, [NOTEBOOK_RELATION]).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+        assert.strictEqual(res.result.actions[0].result.output[0].columns.length, 3);
+        // Ignore issues of order and stringify the JSON array, searching for the
+        // string values we expect to find within the structure.
+        const str = JSON.stringify(res.result.actions[0].result.output[0].columns);
+        assert.notStrictEqual(-1, str.indexOf(notebookName));
+        assert.notStrictEqual(-1, str.indexOf(cellId));
+        assert.notStrictEqual(-1, str.indexOf(initialValue));
+      });
+    }).timeout(60000);
+    it(`should query an update query with inputs`, () => {
+      return lc.query(dbname, queryString2, false, [NOTEBOOK_RELATION], inputs2).then(res => {
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.problems.length, 0);
+        assert.strictEqual(res.result.actions[0].result.output[0].columns.length, 3);
+        // Ignore issues of order and stringify the JSON array, searching for the
+        // string values we expect to find within the structure.
+        const str = JSON.stringify(res.result.actions[0].result.output[0].columns);
+        assert.notStrictEqual(-1, str.indexOf(notebookName));
+        assert.notStrictEqual(-1, str.indexOf(cellId));
+        assert.notStrictEqual(-1, str.indexOf(value));
+      });
+    }).timeout(60000);
+  });
+
   describe('#cardinality', () => {
     const dbname = createUniqueName('db');
     initializeDatabase(dbname);

@@ -84,6 +84,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property nowaitDurable (base name: "nowait_durable")', function() {
+      // uncomment below and update the code to test the property nowaitDurable
+      //var instane = new RaiDbSdk.Transaction();
+      //expect(instance).to.be();
+    });
+
     it('should have the property readonly (base name: "readonly")', function() {
       // uncomment below and update the code to test the property readonly
       //var instane = new RaiDbSdk.Transaction();

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **dbname** | **String** |  | [default to &#39;&#39;]
 **debugLevel** | **Number** |  | [optional] 
 **mode** | **String** |  | [default to &#39;OPEN&#39;]
+**nowaitDurable** | **Boolean** |  | [default to false]
 **readonly** | **Boolean** |  | [default to false]
 **sourceDbname** | **String** |  | [optional] 
 **version** | **Number** |  | [optional] 

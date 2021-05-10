@@ -372,9 +372,15 @@ function RelAPIMixin(Base) {
 
     //
     // Internal helper calling `transactionPost` while managing
-    // the transaction version.
+    // the transaction version and populating the compute name.
     //
     _transactionPost(transaction, resolve, reject) {
+      // For RAICloud's URL param needs, we create a custom `computeName` property
+      // and computeRegion property on the transaction object.
+      // This will be picked up in DefaultApi.js
+      transaction.computeName = this.computeName;
+      transaction.computeRegion = this.computeRegion;
+
       const dbname = transaction.dbname;
       let self = this;
       try {

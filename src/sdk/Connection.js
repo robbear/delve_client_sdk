@@ -20,7 +20,7 @@ class Connection extends RelAPIMixin(RAICloudAPIMixin(class {})) {
    * @param {Number} params.timeout - The default HTTP timeout for all API calls. The default is 60000
    * @param {String} params.accessToken - The API access token
    * @param {String} params.computeName - The name of a RAICloud compute
-   * @param {String} params.computeRegion - The region of the RAICloud compute
+   * @param {String} params.computeRegion - The region of the RAICloud compute, defaults to 'us-east'
    */
   constructor(params = {}) {
     super(params);

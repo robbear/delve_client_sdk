@@ -173,39 +173,6 @@ import {
       });
     }
 
-    /**
-     *
-     * @param {String} dbname
-     * @param {String} defaultComputeName
-     * @param {Boolean} removeDefaultCompute
-     * @param {Boolean} dryrun
-     * @returns {Promise} - Resolves to object: {error, result, response} where
-     * `result` is an empty object {}
-     */
-    updateDatabase(dbname, defaultComputeName, removeDefaultCompute, dryrun = false) {
-      return new Promise((resolve, reject) => {
-        if (this.isLocalServer) {
-          reject(new Error(this._localServerError('updateDatabase')));
-          return;
-        }
-
-        try {
-          const udrp = UpdateDatabaseRequestProtocol.constructFromObject({
-            name: dbname,
-            default_compute_name: defaultComputeName,
-            remove_default_compute: removeDefaultCompute,
-            dryrun: dryrun
-          });
-          this.defaultApi.databasePost(udrp, (error, result, response) => {
-            resolve({error, result, response});
-          });
-        }
-        catch(e) {
-          reject(e);
-        }
-      });
-    }
-
   }
 
   return RAICloudAPI;

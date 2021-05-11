@@ -1,6 +1,7 @@
 const assert = require('assert');
 import Connection from '../../src/sdk/Connection.js';
 
+// TODO: These tests are disabled in CI (see `skip` below). Enable them against a dev version of infra.
 // Connection variable for reuse in tests
 const azurePath = 'https://azure-ux.relationalai.com';
 const accessToken = '### Replace with actual access token ###';

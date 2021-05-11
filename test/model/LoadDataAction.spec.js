@@ -56,13 +56,13 @@
 
     it('should have the property rel (base name: "rel")', function() {
       // uncomment below and update the code to test the property rel
-      //var instane = new RaiDbSdk.LoadDataAction();
+      //var instance = new RaiDbSdk.LoadDataAction();
       //expect(instance).to.be();
     });
 
     it('should have the property value (base name: "value")', function() {
       // uncomment below and update the code to test the property value
-      //var instane = new RaiDbSdk.LoadDataAction();
+      //var instance = new RaiDbSdk.LoadDataAction();
       //expect(instance).to.be();
     });
 

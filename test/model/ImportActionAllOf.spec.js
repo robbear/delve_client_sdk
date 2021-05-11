@@ -56,7 +56,7 @@
 
     it('should have the property inputs (base name: "inputs")', function() {
       // uncomment below and update the code to test the property inputs
-      //var instane = new RaiDbSdk.ImportActionAllOf();
+      //var instance = new RaiDbSdk.ImportActionAllOf();
       //expect(instance).to.be();
     });
 

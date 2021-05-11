@@ -56,37 +56,37 @@
 
     it('should have the property errorCode (base name: "error_code")', function() {
       // uncomment below and update the code to test the property errorCode
-      //var instane = new RaiDbSdk.ClientProblem();
+      //var instance = new RaiDbSdk.ClientProblem();
       //expect(instance).to.be();
     });
 
     it('should have the property isError (base name: "is_error")', function() {
       // uncomment below and update the code to test the property isError
-      //var instane = new RaiDbSdk.ClientProblem();
+      //var instance = new RaiDbSdk.ClientProblem();
       //expect(instance).to.be();
     });
 
     it('should have the property isException (base name: "is_exception")', function() {
       // uncomment below and update the code to test the property isException
-      //var instane = new RaiDbSdk.ClientProblem();
+      //var instance = new RaiDbSdk.ClientProblem();
       //expect(instance).to.be();
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instane = new RaiDbSdk.ClientProblem();
+      //var instance = new RaiDbSdk.ClientProblem();
       //expect(instance).to.be();
     });
 
     it('should have the property path (base name: "path")', function() {
       // uncomment below and update the code to test the property path
-      //var instane = new RaiDbSdk.ClientProblem();
+      //var instance = new RaiDbSdk.ClientProblem();
       //expect(instance).to.be();
     });
 
     it('should have the property report (base name: "report")', function() {
       // uncomment below and update the code to test the property report
-      //var instane = new RaiDbSdk.ClientProblem();
+      //var instance = new RaiDbSdk.ClientProblem();
       //expect(instance).to.be();
     });
 

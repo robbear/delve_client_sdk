@@ -56,7 +56,7 @@
 
     it('should have the property sources (base name: "sources")', function() {
       // uncomment below and update the code to test the property sources
-      //var instane = new RaiDbSdk.IntegrityConstraintViolation();
+      //var instance = new RaiDbSdk.IntegrityConstraintViolation();
       //expect(instance).to.be();
     });
 

@@ -56,25 +56,25 @@
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instane = new RaiDbSdk.Source();
+      //var instance = new RaiDbSdk.Source();
       //expect(instance).to.be();
     });
 
     it('should have the property path (base name: "path")', function() {
       // uncomment below and update the code to test the property path
-      //var instane = new RaiDbSdk.Source();
+      //var instance = new RaiDbSdk.Source();
       //expect(instance).to.be();
     });
 
     it('should have the property value (base name: "value")', function() {
       // uncomment below and update the code to test the property value
-      //var instane = new RaiDbSdk.Source();
+      //var instance = new RaiDbSdk.Source();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.Source();
+      //var instance = new RaiDbSdk.Source();
       //expect(instance).to.be();
     });
 

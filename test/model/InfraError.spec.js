@@ -56,13 +56,13 @@
 
     it('should have the property status (base name: "status")', function() {
       // uncomment below and update the code to test the property status
-      //var instane = new RaiDbSdk.InfraError();
+      //var instance = new RaiDbSdk.InfraError();
       //expect(instance).to.be();
     });
 
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
-      //var instane = new RaiDbSdk.InfraError();
+      //var instance = new RaiDbSdk.InfraError();
       //expect(instance).to.be();
     });
 

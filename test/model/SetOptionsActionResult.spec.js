@@ -56,7 +56,7 @@
 
     it('should have the property dummy (base name: "dummy")', function() {
       // uncomment below and update the code to test the property dummy
-      //var instane = new RaiDbSdk.SetOptionsActionResult();
+      //var instance = new RaiDbSdk.SetOptionsActionResult();
       //expect(instance).to.be();
     });
 

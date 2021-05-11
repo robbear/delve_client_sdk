@@ -56,19 +56,19 @@
 
     it('should have the property relKey (base name: "rel_key")', function() {
       // uncomment below and update the code to test the property relKey
-      //var instane = new RaiDbSdk.ICViolation();
+      //var instance = new RaiDbSdk.ICViolation();
       //expect(instance).to.be();
     });
 
     it('should have the property source (base name: "source")', function() {
       // uncomment below and update the code to test the property source
-      //var instane = new RaiDbSdk.ICViolation();
+      //var instance = new RaiDbSdk.ICViolation();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.ICViolation();
+      //var instance = new RaiDbSdk.ICViolation();
       //expect(instance).to.be();
     });
 

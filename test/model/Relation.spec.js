@@ -56,19 +56,19 @@
 
     it('should have the property columns (base name: "columns")', function() {
       // uncomment below and update the code to test the property columns
-      //var instane = new RaiDbSdk.Relation();
+      //var instance = new RaiDbSdk.Relation();
       //expect(instance).to.be();
     });
 
     it('should have the property relKey (base name: "rel_key")', function() {
       // uncomment below and update the code to test the property relKey
-      //var instane = new RaiDbSdk.Relation();
+      //var instance = new RaiDbSdk.Relation();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.Relation();
+      //var instance = new RaiDbSdk.Relation();
       //expect(instance).to.be();
     });
 

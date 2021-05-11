@@ -56,7 +56,7 @@
 
     it('should have the property output (base name: "output")', function() {
       // uncomment below and update the code to test the property output
-      //var instane = new RaiDbSdk.QueryActionResult();
+      //var instance = new RaiDbSdk.QueryActionResult();
       //expect(instance).to.be();
     });
 

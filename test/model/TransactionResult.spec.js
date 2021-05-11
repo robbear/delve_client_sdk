@@ -56,43 +56,43 @@
 
     it('should have the property aborted (base name: "aborted")', function() {
       // uncomment below and update the code to test the property aborted
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 
     it('should have the property actions (base name: "actions")', function() {
       // uncomment below and update the code to test the property actions
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 
     it('should have the property debugLevel (base name: "debug_level")', function() {
       // uncomment below and update the code to test the property debugLevel
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 
     it('should have the property output (base name: "output")', function() {
       // uncomment below and update the code to test the property output
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 
     it('should have the property problems (base name: "problems")', function() {
       // uncomment below and update the code to test the property problems
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 
     it('should have the property version (base name: "version")', function() {
       // uncomment below and update the code to test the property version
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.TransactionResult();
+      //var instance = new RaiDbSdk.TransactionResult();
       //expect(instance).to.be();
     });
 

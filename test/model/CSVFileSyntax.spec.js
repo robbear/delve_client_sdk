@@ -56,55 +56,55 @@
 
     it('should have the property datarow (base name: "datarow")', function() {
       // uncomment below and update the code to test the property datarow
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property delim (base name: "delim")', function() {
       // uncomment below and update the code to test the property delim
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property escapechar (base name: "escapechar")', function() {
       // uncomment below and update the code to test the property escapechar
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property header (base name: "header")', function() {
       // uncomment below and update the code to test the property header
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property headerRow (base name: "header_row")', function() {
       // uncomment below and update the code to test the property headerRow
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property ignorerepeated (base name: "ignorerepeated")', function() {
       // uncomment below and update the code to test the property ignorerepeated
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property missingstrings (base name: "missingstrings")', function() {
       // uncomment below and update the code to test the property missingstrings
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property normalizenames (base name: "normalizenames")', function() {
       // uncomment below and update the code to test the property normalizenames
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 
     it('should have the property quotechar (base name: "quotechar")', function() {
       // uncomment below and update the code to test the property quotechar
-      //var instane = new RaiDbSdk.CSVFileSyntax();
+      //var instance = new RaiDbSdk.CSVFileSyntax();
       //expect(instance).to.be();
     });
 

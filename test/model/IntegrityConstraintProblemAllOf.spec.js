@@ -56,7 +56,7 @@
 
     it('should have the property exception (base name: "exception")', function() {
       // uncomment below and update the code to test the property exception
-      //var instane = new RaiDbSdk.IntegrityConstraintProblemAllOf();
+      //var instance = new RaiDbSdk.IntegrityConstraintProblemAllOf();
       //expect(instance).to.be();
     });
 

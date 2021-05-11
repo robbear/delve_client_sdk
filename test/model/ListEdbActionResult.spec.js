@@ -56,7 +56,7 @@
 
     it('should have the property rels (base name: "rels")', function() {
       // uncomment below and update the code to test the property rels
-      //var instane = new RaiDbSdk.ListEdbActionResult();
+      //var instance = new RaiDbSdk.ListEdbActionResult();
       //expect(instance).to.be();
     });
 

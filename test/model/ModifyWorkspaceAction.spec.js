@@ -56,19 +56,19 @@
 
     it('should have the property deleteEdb (base name: "delete_edb")', function() {
       // uncomment below and update the code to test the property deleteEdb
-      //var instane = new RaiDbSdk.ModifyWorkspaceAction();
+      //var instance = new RaiDbSdk.ModifyWorkspaceAction();
       //expect(instance).to.be();
     });
 
     it('should have the property deleteSource (base name: "delete_source")', function() {
       // uncomment below and update the code to test the property deleteSource
-      //var instane = new RaiDbSdk.ModifyWorkspaceAction();
+      //var instance = new RaiDbSdk.ModifyWorkspaceAction();
       //expect(instance).to.be();
     });
 
     it('should have the property enableLibrary (base name: "enable_library")', function() {
       // uncomment below and update the code to test the property enableLibrary
-      //var instane = new RaiDbSdk.ModifyWorkspaceAction();
+      //var instance = new RaiDbSdk.ModifyWorkspaceAction();
       //expect(instance).to.be();
     });
 

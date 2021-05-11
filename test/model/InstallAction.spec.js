@@ -56,7 +56,7 @@
 
     it('should have the property sources (base name: "sources")', function() {
       // uncomment below and update the code to test the property sources
-      //var instane = new RaiDbSdk.InstallAction();
+      //var instance = new RaiDbSdk.InstallAction();
       //expect(instance).to.be();
     });
 

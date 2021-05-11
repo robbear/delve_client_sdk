@@ -56,7 +56,7 @@
 
     it('should have the property types (base name: "types")', function() {
       // uncomment below and update the code to test the property types
-      //var instane = new RaiDbSdk.CSVFileSchemaAllOf();
+      //var instance = new RaiDbSdk.CSVFileSchemaAllOf();
       //expect(instance).to.be();
     });
 

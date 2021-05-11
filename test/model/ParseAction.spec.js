@@ -56,13 +56,13 @@
 
     it('should have the property nonterm (base name: "nonterm")', function() {
       // uncomment below and update the code to test the property nonterm
-      //var instane = new RaiDbSdk.ParseAction();
+      //var instance = new RaiDbSdk.ParseAction();
       //expect(instance).to.be();
     });
 
     it('should have the property source (base name: "source")', function() {
       // uncomment below and update the code to test the property source
-      //var instane = new RaiDbSdk.ParseAction();
+      //var instance = new RaiDbSdk.ParseAction();
       //expect(instance).to.be();
     });
 

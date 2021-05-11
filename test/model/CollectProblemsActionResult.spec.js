@@ -56,7 +56,7 @@
 
     it('should have the property problems (base name: "problems")', function() {
       // uncomment below and update the code to test the property problems
-      //var instane = new RaiDbSdk.CollectProblemsActionResult();
+      //var instance = new RaiDbSdk.CollectProblemsActionResult();
       //expect(instance).to.be();
     });
 

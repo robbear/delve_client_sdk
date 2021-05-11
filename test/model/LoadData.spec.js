@@ -56,49 +56,49 @@
 
     it('should have the property contentType (base name: "content_type")', function() {
       // uncomment below and update the code to test the property contentType
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property data (base name: "data")', function() {
       // uncomment below and update the code to test the property data
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property fileSchema (base name: "file_schema")', function() {
       // uncomment below and update the code to test the property fileSchema
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property fileSyntax (base name: "file_syntax")', function() {
       // uncomment below and update the code to test the property fileSyntax
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property integration (base name: "integration")', function() {
       // uncomment below and update the code to test the property integration
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property key (base name: "key")', function() {
       // uncomment below and update the code to test the property key
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property path (base name: "path")', function() {
       // uncomment below and update the code to test the property path
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.LoadData();
+      //var instance = new RaiDbSdk.LoadData();
       //expect(instance).to.be();
     });
 

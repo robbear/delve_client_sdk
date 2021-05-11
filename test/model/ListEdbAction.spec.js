@@ -56,7 +56,7 @@
 
     it('should have the property relname (base name: "relname")', function() {
       // uncomment below and update the code to test the property relname
-      //var instane = new RaiDbSdk.ListEdbAction();
+      //var instance = new RaiDbSdk.ListEdbAction();
       //expect(instance).to.be();
     });
 

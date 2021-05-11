@@ -56,7 +56,7 @@
 
     it('should have the property result (base name: "result")', function() {
       // uncomment below and update the code to test the property result
-      //var instane = new RaiDbSdk.CardinalityActionResult();
+      //var instance = new RaiDbSdk.CardinalityActionResult();
       //expect(instance).to.be();
     });
 

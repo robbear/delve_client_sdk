@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**first** | [**AnyType**](.md) |  | [optional] 
-**second** | [**AnyType**](.md) |  | [optional] 
+**first** | **Object** |  | [optional] 
+**second** | **Object** |  | [optional] 
 **type** | **String** |  | [default to &#39;Pair_AnyValue_AnyValue_&#39;]
 
 

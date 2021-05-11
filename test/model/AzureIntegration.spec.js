@@ -56,31 +56,31 @@
 
     it('should have the property credentials (base name: "credentials")', function() {
       // uncomment below and update the code to test the property credentials
-      //var instane = new RaiDbSdk.AzureIntegration();
+      //var instance = new RaiDbSdk.AzureIntegration();
       //expect(instance).to.be();
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instane = new RaiDbSdk.AzureIntegration();
+      //var instance = new RaiDbSdk.AzureIntegration();
       //expect(instance).to.be();
     });
 
     it('should have the property storageAllowedLocations (base name: "storage_allowed_locations")', function() {
       // uncomment below and update the code to test the property storageAllowedLocations
-      //var instane = new RaiDbSdk.AzureIntegration();
+      //var instance = new RaiDbSdk.AzureIntegration();
       //expect(instance).to.be();
     });
 
     it('should have the property storageBlockedLocations (base name: "storage_blocked_locations")', function() {
       // uncomment below and update the code to test the property storageBlockedLocations
-      //var instane = new RaiDbSdk.AzureIntegration();
+      //var instance = new RaiDbSdk.AzureIntegration();
       //expect(instance).to.be();
     });
 
     it('should have the property tenantId (base name: "tenant_id")', function() {
       // uncomment below and update the code to test the property tenantId
-      //var instane = new RaiDbSdk.AzureIntegration();
+      //var instance = new RaiDbSdk.AzureIntegration();
       //expect(instance).to.be();
     });
 

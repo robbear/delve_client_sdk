@@ -56,13 +56,13 @@
 
     it('should have the property exception (base name: "exception")', function() {
       // uncomment below and update the code to test the property exception
-      //var instane = new RaiDbSdk.ExceptionProblem();
+      //var instance = new RaiDbSdk.ExceptionProblem();
       //expect(instance).to.be();
     });
 
     it('should have the property exceptionStacktrace (base name: "exception_stacktrace")', function() {
       // uncomment below and update the code to test the property exceptionStacktrace
-      //var instane = new RaiDbSdk.ExceptionProblem();
+      //var instance = new RaiDbSdk.ExceptionProblem();
       //expect(instance).to.be();
     });
 

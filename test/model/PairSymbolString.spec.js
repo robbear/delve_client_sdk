@@ -56,19 +56,19 @@
 
     it('should have the property first (base name: "first")', function() {
       // uncomment below and update the code to test the property first
-      //var instane = new RaiDbSdk.PairSymbolString();
+      //var instance = new RaiDbSdk.PairSymbolString();
       //expect(instance).to.be();
     });
 
     it('should have the property second (base name: "second")', function() {
       // uncomment below and update the code to test the property second
-      //var instane = new RaiDbSdk.PairSymbolString();
+      //var instance = new RaiDbSdk.PairSymbolString();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.PairSymbolString();
+      //var instance = new RaiDbSdk.PairSymbolString();
       //expect(instance).to.be();
     });
 

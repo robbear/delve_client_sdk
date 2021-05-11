@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import AnyType from './AnyType';
 import FileSchema from './FileSchema';
 import FileSyntax from './FileSyntax';
 import Integration from './Integration';
@@ -27,7 +26,7 @@ class LoadData {
      * Constructs a new <code>LoadData</code>.
      * @alias module:model/LoadData
      * @param contentType {String} 
-     * @param key {module:model/AnyType} 
+     * @param key {Object} 
      * @param type {module:model/LoadData.TypeEnum} 
      */
     constructor(contentType, key, type) { 
@@ -73,7 +72,7 @@ class LoadData {
                 obj['integration'] = Integration.constructFromObject(data['integration']);
             }
             if (data.hasOwnProperty('key')) {
-                obj['key'] = ApiClient.convertToType(data['key'], AnyType);
+                obj['key'] = ApiClient.convertToType(data['key'], Object);
             }
             if (data.hasOwnProperty('path')) {
                 obj['path'] = ApiClient.convertToType(data['path'], 'String');
@@ -115,7 +114,7 @@ LoadData.prototype['file_syntax'] = undefined;
 LoadData.prototype['integration'] = undefined;
 
 /**
- * @member {module:model/AnyType} key
+ * @member {Object} key
  */
 LoadData.prototype['key'] = undefined;
 

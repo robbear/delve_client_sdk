@@ -56,19 +56,19 @@
 
     it('should have the property missing (base name: "missing")', function() {
       // uncomment below and update the code to test the property missing
-      //var instane = new RaiDbSdk.LiteralAllOf();
+      //var instance = new RaiDbSdk.LiteralAllOf();
       //expect(instance).to.be();
     });
 
     it('should have the property range (base name: "range")', function() {
       // uncomment below and update the code to test the property range
-      //var instane = new RaiDbSdk.LiteralAllOf();
+      //var instance = new RaiDbSdk.LiteralAllOf();
       //expect(instance).to.be();
     });
 
     it('should have the property value (base name: "value")', function() {
       // uncomment below and update the code to test the property value
-      //var instane = new RaiDbSdk.LiteralAllOf();
+      //var instance = new RaiDbSdk.LiteralAllOf();
       //expect(instance).to.be();
     });
 

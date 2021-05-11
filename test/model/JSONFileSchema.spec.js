@@ -56,7 +56,7 @@
 
     it('should have the property dummy (base name: "dummy")', function() {
       // uncomment below and update the code to test the property dummy
-      //var instane = new RaiDbSdk.JSONFileSchema();
+      //var instance = new RaiDbSdk.JSONFileSchema();
       //expect(instance).to.be();
     });
 

@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import AnyType from './AnyType';
 import Area from './Area';
 
 /**
@@ -64,7 +63,7 @@ class Range {
                 obj['end_byte'] = ApiClient.convertToType(data['end_byte'], 'Number');
             }
             if (data.hasOwnProperty('input')) {
-                obj['input'] = ApiClient.convertToType(data['input'], AnyType);
+                obj['input'] = ApiClient.convertToType(data['input'], Object);
             }
             if (data.hasOwnProperty('start_byte')) {
                 obj['start_byte'] = ApiClient.convertToType(data['start_byte'], 'Number');
@@ -91,7 +90,7 @@ Range.prototype['area'] = undefined;
 Range.prototype['end_byte'] = 0;
 
 /**
- * @member {module:model/AnyType} input
+ * @member {Object} input
  */
 Range.prototype['input'] = undefined;
 

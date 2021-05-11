@@ -56,7 +56,7 @@
 
     it('should have the property deleteEdbResult (base name: "delete_edb_result")', function() {
       // uncomment below and update the code to test the property deleteEdbResult
-      //var instane = new RaiDbSdk.ModifyWorkspaceActionResult();
+      //var instance = new RaiDbSdk.ModifyWorkspaceActionResult();
       //expect(instance).to.be();
     });
 

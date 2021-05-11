@@ -56,61 +56,61 @@
 
     it('should have the property abort (base name: "abort")', function() {
       // uncomment below and update the code to test the property abort
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property actions (base name: "actions")', function() {
       // uncomment below and update the code to test the property actions
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property dbname (base name: "dbname")', function() {
       // uncomment below and update the code to test the property dbname
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property debugLevel (base name: "debug_level")', function() {
       // uncomment below and update the code to test the property debugLevel
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property mode (base name: "mode")', function() {
       // uncomment below and update the code to test the property mode
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property nowaitDurable (base name: "nowait_durable")', function() {
       // uncomment below and update the code to test the property nowaitDurable
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property readonly (base name: "readonly")', function() {
       // uncomment below and update the code to test the property readonly
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property sourceDbname (base name: "source_dbname")', function() {
       // uncomment below and update the code to test the property sourceDbname
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property version (base name: "version")', function() {
       // uncomment below and update the code to test the property version
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.Transaction();
+      //var instance = new RaiDbSdk.Transaction();
       //expect(instance).to.be();
     });
 

@@ -56,13 +56,13 @@
 
     it('should have the property head (base name: "head")', function() {
       // uncomment below and update the code to test the property head
-      //var instane = new RaiDbSdk.Cons();
+      //var instance = new RaiDbSdk.Cons();
       //expect(instance).to.be();
     });
 
     it('should have the property tail (base name: "tail")', function() {
       // uncomment below and update the code to test the property tail
-      //var instane = new RaiDbSdk.Cons();
+      //var instance = new RaiDbSdk.Cons();
       //expect(instance).to.be();
     });
 

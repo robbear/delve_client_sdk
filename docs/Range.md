@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **area** | [**Area**](Area.md) |  | 
 **endByte** | **Number** |  | [default to 0]
-**input** | [**AnyType**](.md) |  | [optional] 
+**input** | **Object** |  | [optional] 
 **startByte** | **Number** |  | [default to 0]
 **type** | **String** |  | [default to &#39;Range&#39;]
 

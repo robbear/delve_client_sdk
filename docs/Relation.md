@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**columns** | **[[AnyType]]** |  | [optional] 
+**columns** | **[[Object]]** |  | [optional] 
 **relKey** | [**RelKey**](RelKey.md) |  | 
 **type** | **String** |  | [default to &#39;Relation&#39;]
 

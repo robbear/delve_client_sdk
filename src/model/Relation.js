@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import AnyType from './AnyType';
 import RelKey from './RelKey';
 
 /**
@@ -54,7 +53,7 @@ class Relation {
             obj = obj || new Relation();
 
             if (data.hasOwnProperty('columns')) {
-                obj['columns'] = ApiClient.convertToType(data['columns'], [[AnyType]]);
+                obj['columns'] = ApiClient.convertToType(data['columns'], [[Object]]);
             }
             if (data.hasOwnProperty('rel_key')) {
                 obj['rel_key'] = RelKey.constructFromObject(data['rel_key']);
@@ -70,7 +69,7 @@ class Relation {
 }
 
 /**
- * @member {Array.<Array.<module:model/AnyType>>} columns
+ * @member {Array.<Array.<Object>>} columns
  */
 Relation.prototype['columns'] = undefined;
 

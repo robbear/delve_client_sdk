@@ -56,7 +56,7 @@
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.AbstractProblem();
+      //var instance = new RaiDbSdk.AbstractProblem();
       //expect(instance).to.be();
     });
 

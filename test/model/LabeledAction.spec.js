@@ -56,19 +56,19 @@
 
     it('should have the property action (base name: "action")', function() {
       // uncomment below and update the code to test the property action
-      //var instane = new RaiDbSdk.LabeledAction();
+      //var instance = new RaiDbSdk.LabeledAction();
       //expect(instance).to.be();
     });
 
     it('should have the property name (base name: "name")', function() {
       // uncomment below and update the code to test the property name
-      //var instane = new RaiDbSdk.LabeledAction();
+      //var instance = new RaiDbSdk.LabeledAction();
       //expect(instance).to.be();
     });
 
     it('should have the property type (base name: "type")', function() {
       // uncomment below and update the code to test the property type
-      //var instane = new RaiDbSdk.LabeledAction();
+      //var instance = new RaiDbSdk.LabeledAction();
       //expect(instance).to.be();
     });
 

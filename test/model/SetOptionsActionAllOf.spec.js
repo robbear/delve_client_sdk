@@ -56,25 +56,25 @@
 
     it('should have the property abortOnError (base name: "abort_on_error")', function() {
       // uncomment below and update the code to test the property abortOnError
-      //var instane = new RaiDbSdk.SetOptionsActionAllOf();
+      //var instance = new RaiDbSdk.SetOptionsActionAllOf();
       //expect(instance).to.be();
     });
 
     it('should have the property debug (base name: "debug")', function() {
       // uncomment below and update the code to test the property debug
-      //var instane = new RaiDbSdk.SetOptionsActionAllOf();
+      //var instance = new RaiDbSdk.SetOptionsActionAllOf();
       //expect(instance).to.be();
     });
 
     it('should have the property debugTrace (base name: "debug_trace")', function() {
       // uncomment below and update the code to test the property debugTrace
-      //var instane = new RaiDbSdk.SetOptionsActionAllOf();
+      //var instance = new RaiDbSdk.SetOptionsActionAllOf();
       //expect(instance).to.be();
     });
 
     it('should have the property silent (base name: "silent")', function() {
       // uncomment below and update the code to test the property silent
-      //var instane = new RaiDbSdk.SetOptionsActionAllOf();
+      //var instance = new RaiDbSdk.SetOptionsActionAllOf();
       //expect(instance).to.be();
     });
 

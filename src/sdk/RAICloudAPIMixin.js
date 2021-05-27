@@ -25,7 +25,8 @@ import {
      * @param {Array.<String>} opts.id - ID of a compute
      * @param {Array.<String>} opts.name - Name of a compute
      * @param {Array.<String>} opts.size - Size is one of "XS", "S", "M", "L", "XL"
-     * @param {Array.<String>} opts.state - One of "PROVISIONING", "PROVISIONED", "DELETING", "DELETED"
+     * @param {Array.<String>} opts.state - One of: "REQUESTED","PROVISIONING", "REGISTERING", "PROVISIONED",
+     * "PROVISION_FAILED", "DELETE_REQUESTED", "STOPPING", "DELETING", "DELETED", "DELETION_FAILED"
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is of type `ListComputesResponseProtocol`
      */
@@ -53,11 +54,10 @@ import {
      * @param {String} name - Name of the compute to create
      * @param {String} size - Size is one of "XS", "S", "M", "L", "XL"
      * @param {String} region - Region where the compute should be created
-     * @param {Boolean} dryrun - Simulated create
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is of type `CreateComputeResponseProtocol`
      */
-    createCompute(name, size = "xs", region = null, dryrun = false) {
+    createCompute(name, size = "xs", region = null) {
       region = region || 'us-east';
 
       return new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ import {
 
         try {
           const ccrp = CreateComputeRequestProtocol.constructFromObject({
-            name, size, region, dryrun
+            name, size, region
           });
 
           this.defaultApi.computePut(ccrp, (error, result, response) => {
@@ -84,11 +84,10 @@ import {
     /**
      *
      * @param {String} name - Name of the compute to delete
-     * @param {Boolean} dryrun - Simulated delete
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is of type `DeleteComputeResponseProtocol`
      */
-    deleteCompute(name, dryrun = false) {
+    deleteCompute(name) {
       return new Promise((resolve, reject) => {
         if (this.isLocalServer) {
           reject(new Error(this._localServerError('deleteCompute')));
@@ -96,7 +95,7 @@ import {
         }
 
         try {
-          const dcp = DeleteComputeRequestProtocol.constructFromObject({name, dryrun});
+          const dcp = DeleteComputeRequestProtocol.constructFromObject({name});
 
           this.defaultApi.computeDelete(dcp, (error, result, response) => {
             resolve({error, result, response});
@@ -109,7 +108,7 @@ import {
     }
 
     /**
-     * Remove the default compute
+     * Remove the database's association with its current default compute
      *
      * @param {String} dbname - Database name associated with the default compute
      * @returns {Promise} - Resolves to object: {error, result, response} where
@@ -117,6 +116,39 @@ import {
      */
     removeDefaultCompute(dbname) {
       return this.updateDatabase(dbname, null, true, false);
+    }
+
+    /**
+     * Update the database's association with a default compute.
+     *
+     * @param {String} dbname - The name of the database
+     * @param {String} defaultComputeName - The name of the compute to associate with the database
+     * @param {Boolean} removeDefaultCompute - If true, remove the default compute association from the database
+     * @returns {Promise} - Resolves to object: {error, result, response} where
+     * `result` is an empty object {}`
+     */
+    updateDatabase(dbname, defaultComputeName, removeDefaultCompute) {
+      return new Promise((resolve, reject) => {
+        if (this.isLocalServer) {
+          reject(new Error(this._localServerError('updateDatabase')));
+          return;
+        }
+
+        try {
+          const udrp = UpdateDatabaseRequestProtocol.constructFromObject({
+            name: dbname,
+            default_compute_name: defaultComputeName,
+            remove_default_compute: removeDefaultCompute
+          });
+
+          this.defaultApi.databasePost(udrp, (error, result, response) => {
+            resolve({error, result, response});
+          });
+        }
+        catch(e) {
+          reject(e);
+        }
+      });
     }
 
     /**

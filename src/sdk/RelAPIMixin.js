@@ -24,16 +24,18 @@ function RelAPIMixin(Base) {
      * Run `actions` against the database `dbname`
      *
      * @param {String} dbname
+     * @param {String} computeName
      * @param {LabeledAction[]} actions
      * @param {Boolean} isReadOnly
      * @param {ModeEnum} mode
      * @returns {Promise}
      */
-    runActions(dbname, actions, isReadOnly, mode) {
+    runActions(dbname, computeName, actions, isReadOnly, mode) {
       return new Promise((resolve, reject) => {
         let transaction = new Transaction();
         transaction.mode = mode;
         transaction.dbname = dbname;
+        transaction.computeName = computeName;
         transaction.readonly = isReadOnly;
         transaction.actions = actions;
         transaction.version = this.getTransactionVersion(dbname);
@@ -46,13 +48,14 @@ function RelAPIMixin(Base) {
      * Run a single action against the database `dbname`
      *
      * @param {String} dbname - The name of the database
+     * @param {String} computeName - The name of the compute
      * @param {LabeledAction} action - The LabeledAction to run
      * @param {Boolean} isReadOnly - If true, the transaction is read-only
      * @param {ModeEnum} mode - The transaction mode
      * @returns {Promise}
      */
-    runAction(dbname, action, isReadOnly, mode) {
-      return this.runActions(dbname, [action], isReadOnly, mode);
+    runAction(dbname, computeName, action, isReadOnly, mode) {
+      return this.runActions(dbname, computeName, [action], isReadOnly, mode);
     }
 
     /**
@@ -100,14 +103,16 @@ function RelAPIMixin(Base) {
      * Constructs an action to install a piece of source code, `sourceString`, into
      * the source `sourceName`. `name` will be used as the name of the action.
      *
-     * @param {*} name - Name for this action
-     * @param {*} sourceName - Name of source being installed
-     * @param {*} sourceString - The source code to be installed
+     * @param {String} name - Name for this action
+     * @param {String} sourceName - Name of source being installed
+     * @param {String} sourceString - The source code to be installed
+     * @param {String} sourcePath - The path specifier for the source to be installed. Defaults to sourceName.
      * @returns {LabeledAction}
      */
-    installAction(name, sourceName, sourceString) {
+    installAction(name, sourceName, sourceString, sourcePath) {
       let source = new Source();
       source.name = sourceName;
+      source.path = sourcePath ? sourcePath : sourceName;
       source.value = sourceString;
       source.type = 'Source';
 
@@ -201,6 +206,7 @@ function RelAPIMixin(Base) {
      * Query the database `dbname`
      *
      * @param {String} dbname - The database to connect to
+     * @param {String} computeName - The name of the compute
      * @param {String} queryString - The source of the query to execute
      * @param {String} isReadOnly - Defaults to true, set to false for an update query
      * @param {String[]} outputs - Relation names to retrieve from the database and return
@@ -213,82 +219,88 @@ function RelAPIMixin(Base) {
      *  res = await query('testdb', 'def foo = 1', ['foo']);
      *  console.log(`error: ${res.error}, transactionResult: ${res.result}, responseObject: ${res.response}`);
      */
-    query(dbname, queryString, isReadOnly=true, outputs=[], inputs=[], actionName = 'action') {
+    query(dbname, computeName, queryString, isReadOnly=true, outputs=[], inputs=[], actionName = 'action') {
       const action = this.queryAction(actionName, queryString, outputs, inputs);
 
-      return this.runAction(dbname, action, isReadOnly, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, isReadOnly, Transaction.ModeEnum.OPEN);
     }
 
     /**
      * Install source, `sourceString` named `name` into the database `dbname`
      *
      * @param {String} dbname - The name of the database
+     * @param {String} computeName - The name of the compute
      * @param {String} sourceName - Source name to install
      * @param {String} sourceString - Source code to be installed
+     * @param {String} sourcePath - Source path for source to be installed. Defaults to sourceName.
      * @param {String} actionName - The action name
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    installSource(dbname, sourceName, sourceString, actionName = 'action') {
-      const action = this.installAction(actionName, sourceName, sourceString);
+    installSource(dbname, computeName, sourceName, sourceString, sourcePath = null, actionName = 'action') {
+      const action = this.installAction(actionName, sourceName, sourceString, sourcePath);
 
-      return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, false, Transaction.ModeEnum.OPEN);
     }
 
     /**
      * Deletes a source named `sourceName` from the database.
      *
      * @param {String} dbname - The database name
+     * @param {String} computeName - The name of the compute
      * @param {String} sourceName - The name of the source to delete
      * @param {String} actionName - The name of the action
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    deleteSource(dbname, sourceName, actionName = 'action') {
+    deleteSource(dbname, computeName, sourceName, actionName = 'action') {
       const action = this.modifyWorkspaceAction(actionName, sourceName);
 
-      return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, false, Transaction.ModeEnum.OPEN);
     }
 
     /**
      * List sources installed in database `dbname`
      *
-     * @param {*} dbname - The database name
-     * @param {*} actionName - The name of the action
+     * @param {String} dbname - The database name
+     * @param {String} computeName - The name of the compute
+     * @param {String} actionName - The name of the action
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    listSources(dbname, actionName = 'action') {
+    listSources(dbname, computeName, actionName = 'action') {
       const action = this.listSourceAction(actionName);
 
-      return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, false, Transaction.ModeEnum.OPEN);
     }
 
     /**
      * Create database with name `dbname`, optionally overwriting the existing one.
      *
      * @param {String} dbname - The database name
+     * @param {String} computeName - The name of the compute associated with the created database
      * @param {Boolean} overwrite - If true, overwrites an existing database of name `dbname`
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    createDatabase(dbname, overwrite) {
+    createDatabase(dbname, computeName, overwrite) {
       const mode = overwrite
         ? Transaction.ModeEnum.CREATE_OVERWRITE
         : Transaction.ModeEnum.CREATE;
 
-      return this.runActions(dbname, [], false, mode);
+      return this.runActions(dbname, computeName, [], false, mode);
     }
 
     /**
      * Test a connection to the database named `dbname`
      *
      * @param {String} dbname - The database name
+     * @param {String} computeName - The compute name
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    connectToDatabase(dbname) {
-      return this.runActions(dbname, [], true, Transaction.ModeEnum.OPEN);
+    connectToDatabase(dbname, computeName) {
+      return this.runActions(dbname, computeName, [], true, Transaction.ModeEnum.OPEN);
     }
 
     /**
@@ -300,11 +312,12 @@ function RelAPIMixin(Base) {
      *
      * @param {String} cloneName - The name of the new, cloned database
      * @param {String} dbName - The name of the database from which to create the clone
+     * @param {String} computeName - The name of the compute
      * @param {Boolean} overwrite - If true, overwrites an existing database of name `cloneName`
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    cloneDatabase(cloneName, dbName, overwrite) {
+    cloneDatabase(cloneName, dbName, computeName, overwrite) {
       const mode = overwrite
         ? Transaction.ModeEnum.CLONE_OVERWRITE
         : Transaction.ModeEnum.CLONE;
@@ -314,6 +327,7 @@ function RelAPIMixin(Base) {
         transaction.mode = mode;
         transaction.dbname = cloneName;
         transaction.source_dbname = dbName;
+        transaction.computeName = computeName;
         transaction.readonly = false;
         transaction.actions = [];
 
@@ -325,30 +339,32 @@ function RelAPIMixin(Base) {
      * List Extensional Databases in database `dbname` with the relation name `relname`
      *
      * @param {String} dbname - The name of the database
+     * @param {String} computeName - The name of the compute
      * @param {String} relname - The relationship name to list
      * @param {String} actionName - The name of this action
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    listEdb(dbname, relname, actionName = 'action') {
+    listEdb(dbname, computeName, relname, actionName = 'action') {
       const action = this.listEdbAction(actionName, relname);
 
-      return this.runAction(dbname, action, true, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, true, Transaction.ModeEnum.OPEN);
     }
 
     /**
      * Return the cardinality of relation `relname` in database `dbname`.
      *
      * @param {String} dbname - The name of the database
+     * @param {String} computeName - The name of the compute
      * @param {String} relname - The relationship whose cardinality is to be listed
      * @param {String} actionName - The name of this action
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    cardinality(dbname, relname, actionName = 'action') {
+    cardinality(dbname, computeName, relname, actionName = 'action') {
       const action = this.cardinalityAction(actionName, relname);
 
-      return this.runAction(dbname, action, true, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, true, Transaction.ModeEnum.OPEN);
     }
 
     /**
@@ -356,18 +372,19 @@ function RelAPIMixin(Base) {
      * Deprecated - Use the language-internal query instead.
      *
      * @param {String} dbname - The name of the database
+     * @param {String} computeName - The name of the compute
      * @param {String} data - A string representing the JSON to import. Provide either `data` or `path`
      * @param {String} path - Path to a JSON file. Provide either `data` or `path`
      * @param {String} relname - The relation name to use for referencing the JSON data
      * @returns {Promise} - Resolves to object: {error, result, response} where
      * `result` is a `TransactionResult`.
      */
-    loadJSON(dbname, data, path, relname, actionName = 'action') {
+    loadJSON(dbname, computeName, data, path, relname, actionName = 'action') {
       console.warn('loadJSON is deprecated. Use the language-internal query instead.');
 
       const action = this.loadJSONAction(actionName, data, path, relname);
 
-      return this.runAction(dbname, action, false, Transaction.ModeEnum.OPEN);
+      return this.runAction(dbname, computeName, action, false, Transaction.ModeEnum.OPEN);
     }
 
     //
@@ -375,12 +392,6 @@ function RelAPIMixin(Base) {
     // the transaction version and populating the compute name.
     //
     _transactionPost(transaction, resolve, reject) {
-      // For RAICloud's URL param needs, we create a custom `computeName` property
-      // and computeRegion property on the transaction object.
-      // This will be picked up in DefaultApi.js
-      transaction.computeName = this.computeName;
-      transaction.computeRegion = this.computeRegion;
-
       const dbname = transaction.dbname;
       let self = this;
       try {

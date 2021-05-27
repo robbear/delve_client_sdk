@@ -11,7 +11,6 @@ const dbname = 'unittest-dbname-1';
 function createConnection() {
   return new Connection({
     basePath: azurePath,
-    computeName: computeName,
     accessToken: accessToken
   });
 }
@@ -71,14 +70,24 @@ describe.skip('RAICloudAPIMixin', () => {
     it(`creates a database named "${dbname}"`, () => {
       const conn = createConnection();
 
-      return conn.createDatabase(dbname, true).then(res => {
+      return conn.createDatabase(dbname, computeName, true).then(res => {
         //console.log(res.error);
         //console.log(res.result.problems);
         assert.strictEqual(res.error, null);
         assert.strictEqual(res.result.problems.length, 0);
       });
     }).timeout(60000);
-    it(`lists the compute's databases filtered on "${dbname}"`, () => {
+    it(`lists the account's databases`, () => {
+      const conn = createConnection();
+
+      return conn.listDatabases().then(res => {
+        //console.log(res.error);
+        //console.log(res.result);
+        assert.strictEqual(res.error, null);
+        assert.notStrictEqual(res.result.databases.length, 0);
+      });
+    }).timeout(60000);
+    it(`lists the accounts's databases filtered on "${dbname}"`, () => {
       const conn = createConnection();
 
       return conn.listDatabases({name: [dbname]}).then(res => {
@@ -88,16 +97,27 @@ describe.skip('RAICloudAPIMixin', () => {
         assert.strictEqual(res.result.databases.length, 1);
       });
     }).timeout(60000);
+    it(`lists the account's databases and finds "${dbname}" on default compute named "${computeName}"`, () => {
+      const conn = createConnection();
+
+      return conn.listDatabases({name: [dbname]}).then(res => {
+        //console.log(res.error);
+        //console.log(res.result);
+        assert.strictEqual(res.error, null);
+        assert.strictEqual(res.result.databases.length, 1);
+        assert.strictEqual(res.result.databases[0].default_compute_name, computeName);
+      });
+    }).timeout(60000);
     it(`issues a database query`, () => {
       const conn = createConnection();
 
-      return conn.query(dbname, `def output = 19940506`).then(res => {
+      return conn.query(dbname, computeName, `def output = 19940506`).then(res => {
         //console.log(res.error);
         //console.log(res.result.problems);
         assert.strictEqual(res.error, null);
         assert.strictEqual(res.result.problems.length, 0);
         assert.strictEqual(res.result.output[0].columns[0][0], 19940506);
-      })
+      });
     }).timeout(60000);
     it(`lists the computes events`, () => {
       const conn = createConnection();

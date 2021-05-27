@@ -19,8 +19,6 @@ class Connection extends RelAPIMixin(RAICloudAPIMixin(class {})) {
    * The default is http://127.0.0.1:8010.
    * @param {Number} params.timeout - The default HTTP timeout for all API calls. The default is 60000
    * @param {String} params.accessToken - The API access token
-   * @param {String} params.computeName - The name of a RAICloud compute
-   * @param {String} params.computeRegion - The region of the RAICloud compute, defaults to 'us-east'
    */
   constructor(params = {}) {
     super(params);
@@ -44,14 +42,6 @@ class Connection extends RelAPIMixin(RAICloudAPIMixin(class {})) {
     } else {
       this.accessToken = '';
     }
-    if (params.hasOwnProperty('computeName')) {
-      this.computeName = params.computeName;
-    }
-    if (params.hasOwnProperty('computeRegion')) {
-      this.computeRegion = params.computeRegion;
-    } else {
-      this.computeRegion = 'us-east';
-    }
   }
 
   get isLocalServer() {
@@ -73,20 +63,6 @@ class Connection extends RelAPIMixin(RAICloudAPIMixin(class {})) {
         accessToken: this._accessToken
       }
     }
-  }
-
-  get computeName() {
-    return this._computeName;
-  }
-  set computeName(computeName) {
-    this._computeName = computeName;
-  }
-
-  get computeRegion() {
-    return this._computeRegion;
-  }
-  set computeRegion(computeRegion) {
-    this._computeRegion = computeRegion;
   }
 
   get api() {

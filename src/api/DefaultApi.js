@@ -446,6 +446,7 @@ export default class DefaultApi {
       };
       let queryParams = {
         'dbname': transaction.dbname,
+        'source_dbname': transaction.source_dbname,
         'open_mode': transaction.mode,
         'compute_name': transaction.computeName,
         'region': 'us-east' // Hard-coded, currently required by RAICloud
